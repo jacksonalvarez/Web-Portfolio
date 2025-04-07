@@ -17,6 +17,7 @@
       background-color: #0a0a0a;
       color: #f5f5f5;
       overflow-x: hidden;
+      font-size: calc(1em + 5px); /* Make all content 5px larger */
     }
     
     #canvas-container {
@@ -27,13 +28,15 @@
       height: 100vh;
       z-index: -1;
     }
-  .contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 2rem; /* Adds space between contact and footer */
-  }
+    
+    .contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2rem; /* Adds space between contact and footer */
+    }
+    
     .content {
       position: relative;
       z-index: 10;
@@ -46,7 +49,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 4rem;
+      padding: 1.5rem 2rem; /* Reduced padding in half */
       background: rgba(10, 10, 10, 0.7);
       backdrop-filter: blur(10px);
       z-index: 100;
@@ -79,7 +82,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 4rem;
+      align-items: center; /* Center the hero content */
+      padding: 0 2rem; /* Reduced padding in half */
+      text-align: center; /* Center text in hero */
     }
     
     .greeting {
@@ -128,18 +133,17 @@
     
     section {
       min-height: 100vh;
-      padding: 8rem 4rem 4rem;
+      padding: 4rem 2rem 2rem; /* Reduced padding in half */
     }
     
-  .section-title {
-    font-size: 2rem;
-    margin-bottom: 3rem;
-    display: flex;
-    justify-content: center; /* Ensures centering horizontally */
-    align-items: center;
-    width: 100%; /* Ensures full width for centering */
-  }
-
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: center; /* Ensures centering horizontally */
+      align-items: center;
+      width: 100%; /* Ensures full width for centering */
+    }
     
     .section-title::after {
       content: "";
@@ -158,12 +162,14 @@
       background-color: rgba(245, 245, 245, 0.3);
       margin-right: 1rem;
     }
+    
     .line-b {
       height: 1px;
       background-color: rgba(245, 245, 245, 0.3);
       width: 100%; /* Make the line span across the full width */
       margin: 1rem 0; /* Adjust space above and below the line */
     }
+    
     .about-content {
       display: flex;
       justify-content: space-between;
@@ -185,6 +191,7 @@
       flex-wrap: wrap;
       gap: 1rem;
       margin-top: 2rem;
+      margin-bottom: 3rem; /* Add space before project cards */
     }
     
     .skill {
@@ -310,7 +317,7 @@
     
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 1rem; /* Reduced padding in half */
       color: rgba(245, 245, 245, 0.5);
     }
     
@@ -342,12 +349,12 @@
     
     @media (max-width: 768px) {
       nav {
-        padding: 1rem 2rem;
+        padding: 1rem 1rem; /* Reduced padding in half */
       }
       
       .hero, section {
-        padding-left: 2rem;
-        padding-right: 2rem;
+        padding-left: 1rem; /* Reduced padding in half */
+        padding-right: 1rem; /* Reduced padding in half */
       }
       
       .hero h1 {
@@ -378,7 +385,7 @@
       <div class="logo">jackson-alvarez.dev</div>
       <div class="nav-links">
         <a href="#home">Home 🏠</a>
-        <a href="#projects">Blog 📚</a>
+        <a href="#about">About 👋</a>
       </div>
     </nav>
     
@@ -393,7 +400,7 @@
       </div>
     </section>
 
-        <section id="about">
+    <section id="about">
       <h2 class="section-title">About Me</h2>
       <div class="about-content">
         <div class="about-text">
@@ -412,6 +419,61 @@
             <span class="skill">Docker</span>
             <span class="skill">AWS</span>
           </div>
+          
+          <!-- Project cards added to bottom of about me section -->
+          <h3 style="margin-bottom: 2rem;">Some Things I've Built</h3>
+          <div class="project-grid">
+            <div class="project-card">
+              <div class="project-content">
+                <h3 class="project-title">Centipede</h3>
+                <p class="project-description">Capstone Project for Spring 2025</p>
+                <div class="project-tech">
+                  <span>JavaScript</span> •
+                  <span>Three.js</span> •
+                  <span>React</span> •
+                  <span>Node.js</span>
+                </div>
+                <div class="project-links">
+                  <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+                  <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="project-card">
+              <div class="project-content">
+                <h3 class="project-title">jackson-alvarez.dev</h3>
+                <p class="project-description">A reactive website that I will be using as a portfolio and to run my web projects.</p>
+                <div class="project-tech">
+                  <span>HTML5</span> •
+                  <span>CSS3</span> •
+                  <span>JavaScript</span> •
+                  <span>Three.js</span>
+                </div>
+                <div class="project-links">
+                  <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+                  <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="project-card">
+              <div class="project-content">
+                <h3 class="project-title">Pi-Robotics</h3>
+                <p class="project-description">Robotic arm project using Raspberry Pi and computer vision.</p>
+                <div class="project-tech">
+                  <span>Python</span> •
+                  <span>Raspberry Pi</span> •
+                  <span>OpenCV</span> •
+                  <span>TensorFlow</span>
+                </div>
+                <div class="project-links">
+                  <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+                  <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="about-image">
           <div class="about-image-wrapper">
@@ -421,93 +483,6 @@
       </div>
     </section>
     
-    <section id="projects">
-      <h2 class="section-title">Some Things I've Built</h2>
-      <div class="project-grid">
-        <div class="project-card">
-          <div class="project-content">
-            <h3 class="project-title">Centipede</h3>
-            <p class="project-description">Capstone Project for Spring 2025</p>
-            <div class="project-tech">
-              <span>JavaScript</span> •
-              <span>Three.js</span> •
-              <span>React</span> •
-              <span>Node.js</span>
-            </div>
-            <div class="project-links">
-              <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
-              <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <div class="project-content">
-            <h3 class="project-title">jackson-alvarez.dev</h3>
-            <p class="project-description">A reactive website that I will be using as a portfolio and to run my web projects.</p>
-            <div class="project-tech">
-              <span>HTML5</span> •
-              <span>CSS3</span> •
-              <span>JavaScript</span> •
-              <span>Three.js</span>
-            </div>
-            <div class="project-links">
-              <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
-              <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <div class="project-content">
-            <h3 class="project-title">Pi-Robotics</h3>
-            <p class="project-description">Robotic arm project using Raspberry Pi and computer vision.</p>
-            <div class="project-tech">
-              <span>Python</span> •
-              <span>Raspberry Pi</span> •
-              <span>OpenCV</span> •
-              <span>TensorFlow</span>
-            </div>
-            <div class="project-links">
-              <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
-              <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <div class="project-content">
-            <h3 class="project-title">Rasterization-Engine-in-Haskell</h3>
-            <p class="project-description">A basic 2D rasterization engine in Haskell.</p>
-            <div class="project-tech">
-              <span>Haskell</span> •
-              <span>OpenGL</span> •
-              <span>Graphics Programming</span>
-            </div>
-            <div class="project-links">
-              <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
-              <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <div class="project-content">
-            <h3 class="project-title">Simple-Askii-Generator</h3>
-            <p class="project-description">Askii Generator Written in Python</p>
-            <div class="project-tech">
-              <span>Python</span> •
-              <span>Image Processing</span> •
-              <span>CLI</span>
-            </div>
-            <div class="project-links">
-              <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
-              <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
     <div class="line-b"></div>  
     <footer>
       <p>Designed & Built by Jackson Alvarez</p>
