@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jackson Alvarez | Fullstack Developer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      background-color: #0a0a0a;
+      color: #f5f5f5;
+      overflow-x: hidden;
+      font-size: calc(1em + 5px); /* Make all content 5px larger */
+    }
+    
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+    }
+    
+    .content {
+      position: relative;
+      z-index: 10;
+    }
+    
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #64ffda;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: #64ffda;
+    }
+    
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    
+    .greeting {
+      color: #64ffda;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(245, 245, 245, 0.7);
+      margin-bottom: 2rem;
+    }
+    
+    .hero p {
+      max-width: 600px;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: rgba(245, 245, 245, 0.7);
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border: 2px solid #64ffda;
+      background: transparent;
+      color: #64ffda;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+    
+    .btn:hover {
+      background: rgba(100, 255, 218, 0.1);
+    }
+    
+    section {
+      min-height: 100vh;
+      padding: 4rem 5rem 2rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .section-title::after {
+      content: "";
+      display: block;
+      height: 1px;
+      width: 300px;
+      background-color: rgba(245, 245, 245, 0.3);
+      margin-left: 1rem;
+    }
+
+    .section-title::before {
+      content: "";
+      display: block;
+      height: 1px;
+      width: 300px;
+      background-color: rgba(245, 245, 245, 0.3);
+      margin-right: 1rem;
+    }
+    
+    .about-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .about-text {
+      flex: 3;
+      text-align: center;
+    }
+    
+    .about-text p {
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+      color: rgba(245, 245, 245, 0.8);
+    }
+    
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem auto 3rem auto;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .skill {
+      padding: 0.5rem 1rem;
+      background: rgba(100, 255, 218, 0.1);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: #64ffda;
+    }
+    
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+    
+    .project-grid > * {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .project-card {
+      background: #1a1a1a;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .project-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .project-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #64ffda;
+    }
+    
+    .project-description {
+      color: rgba(245, 245, 245, 0.7);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      flex-grow: 1;
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .project-tech span {
+      font-size: 0.8rem;
+      color: #64ffda;
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: auto;
+    }
+    
+    .project-links a {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+    
+    .project-links a:hover {
+      color: #64ffda;
+    }
+    
+    .contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .contact p {
+      max-width: 600px;
+      margin-bottom: 2rem;
+      color: rgba(245, 245, 245, 0.8);
+    }
+    
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: rgba(245, 245, 245, 0.5);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    
+    .social-links a {
+      color: rgba(245, 245, 245, 0.7);
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: #64ffda;
+    }
+    
+    .glow {
+      text-shadow: 0 0 10px rgba(100, 255, 218, 0.7);
+    }
+    
+    /* For small to medium screens */
+    @media (min-width: 351px) and (max-width: 767px) {
+      .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    
+    /* For medium screens */
+    @media (min-width: 1px) and (max-width: 1200px) {
+      .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        max-width: 900px;
+      }
+    }
+    
+    /* For large screens */
+    @media (min-width: 1201px) {
+      .project-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1200px;
+      }
+    }
+    
+    /* Project section container to center the grid */
+    #projects {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1rem;
+      }
+      
+      .hero, section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .about-content {
+        flex-direction: column;
+      }
+      
+      .section-title::before,
+      .section-title::after {
+        width: 100px;
+      }
+      
+      .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        justify-items: center;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="canvas-container"></div>
+  
+  <div class="content">
+    <nav>
+      <div class="logo glow">jackson-alvarez.dev</div>
+      <div class="nav-links">
+        <a href="#home">Home 🏠</a>
+        <a href="#about">About 👨‍💻</a>
+        <a href="#projects">Projects 🚀</a>
+        <a href="#contact">Contact 📬</a>
+      </div>
+    </nav>
+    
+    <section id="home" class="hero">
+      <div class="greeting glow">- Jackson Alvarez -</div>
+      <h1>Jackson Alvarez</h1>
+      <h2>Fullstack Developer</h2>
+      <p>My dream is to develop software that makes a difference. I enjoy creating engaging, responsive applications and exploring new technologies. Currently looking for full-time work.</p>
+      <div>
+        <a href="#" class="btn glow">Résumé</a>
+        <a href="mailto:hello@jackson-alvarez.dev" class="btn glow">Email me</a>
+      </div>
+    </section>
+    
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>I'm a developer from <u>Charlotte, NC</u> currently looking for work! I'm all about building cool stuff—clean interfaces, smart backends, and anything in between. <b><u>I graduate this July, but I'll be walking across the stage this May.</u></b>
+           I love tech that's fun, useful, and maybe a little unexpected. When I'm not coding, you'll probably find me experimenting with 3D animation, messing around with game dev, or just diving into whatever project has me curious that week.</p>
+          <p>Here are a few technologies I've been working with recently:</p>
+          <div class="skills">
+            <span class="skill">JavaScript (ES6+)</span>
+            <span class="skill">TypeScript</span>
+            <span class="skill">React</span>
+            <span class="skill">Node.js</span>
+            <span class="skill">Three.js</span>
+            <span class="skill">Next.js</span>
+            <span class="skill">GraphQL</span>
+            <span class="skill">Python</span>
+            <span class="skill">Docker</span>
+            <span class="skill">AWS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="projects">
+      <h2 class="section-title">Some Things I've Built</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-content">
+            <h3 class="project-title">Centipede</h3>
+            <p class="project-description">A 3D fps game that gets more difficult as you go on. This was my graduation project.</p>
+            <div class="project-tech">
+              <span>Unity</span> •
+              <span>C#</span> •
+              <span>Blender</span>
+            </div>
+            <div class="project-links">
+              <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+              <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-content">
+            <h3 class="project-title">jackson-alvarez.dev</h3>
+            <p class="project-description">A simple web portfolio. I wanted to improve my css and showcase my work!</p>
+            <div class="project-tech">
+              <span>Next.js</span> •
+              <span>TypeScript</span> •
+              <span>CSS3</span> •
+              <span>Vercel</span>
+            </div>
+            <div class="project-links">
+              <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+              <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-content">
+            <h3 class="project-title">Raskell</h3>
+            <p class="project-description">A drawing engine that uses functional languages.</p>
+            <div class="project-tech">
+              <span>Haskell</span> •
+              <span>Tokenizing</span> •
+              <span>Lexing And Parsing</span> •
+              <span>GLUT GUI Wrapper</span>
+            </div>
+            <div class="project-links">
+              <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+              <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-content">
+            <h3 class="project-title">Pi-Robotics</h3>
+            <p class="project-description">A Robotic arm project using Raspberry Pi and computer vision.</p>
+            <div class="project-tech">
+              <span>Python</span> •
+              <span>Raspberry Pi</span> •
+              <span>OpenCV</span> •
+              <span>Servo Programming</span>
+            </div>
+            <div class="project-links">
+              <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+              <a href="#" aria-label="External link"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="contact">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact">
+        <p>I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll do my best to get back to you!</p>
+        <a href="mailto:hello@jackson-alvarez.dev" class="btn glow">Say Hello</a>
+      </div>
+    </section>
+    
+    <footer>
+      <p>Designed & Built by Jackson Alvarez</p>
+      <div class="social-links">
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // Three.js implementation for animated galaxy background
+    const container = document.getElementById('canvas-container');
+    
+    // Scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+    
+    // Particles system for galaxy
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 3000; // More particles for a denser look
+    
+    const posArray = new Float32Array(particlesCount * 3);
+    const colors = new Float32Array(particlesCount * 3);
+    
+    // Generate galaxy-like distribution
+    for (let i = 0; i < particlesCount; i++) {
+      // Calculate index in the arrays
+      const i3 = i * 3;
+      
+      // Create disc-shaped galaxy with spiral arms
+      const radius = Math.random() * 5 + 0.8;
+      const spinAngle = radius * 2.5; // Controls the spiral tightness
+      const branchAngle = (i % 3) * Math.PI * 2 / 3; // 3 spiral arms
+      
+      const randomX = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 0.3;
+      const randomY = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 0.3;
+      const randomZ = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 0.3;
+      
+      // Spiral pattern
+      posArray[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
+      posArray[i3 + 1] = randomY * 0.5; // Flatter on Y axis
+      posArray[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
+      
+      // Colors - blue to cyan with occasional whites
+      const blueHue = 0.6 + Math.random() * 0.15; // Blue-cyan range in HSL
+      const whiteness = Math.random();
+      
+      if (whiteness > 0.95) { // Occasional white star
+        colors[i3] = 1;
+        colors[i3 + 1] = 1;
+        colors[i3 + 2] = 1;
+      } else {
+        // Color the stars based on position (distance from center = temperature)
+        const dist = Math.sqrt(posArray[i3]**2 + posArray[i3+1]**2 + posArray[i3+2]**2);
+        
+        if (dist < 1.5) { // Center stars - warmer
+          colors[i3] = 0.9 + Math.random() * 0.1; // More red/white in center
+          colors[i3 + 1] = 0.8 + Math.random() * 0.2;
+          colors[i3 + 2] = 0.6 + Math.random() * 0.3;
+        } else { // Outer stars - cooler blues
+          colors[i3] = 0.3 + Math.random() * 0.3; // Cyan to blue range
+          colors[i3 + 1] = 0.7 + Math.random() * 0.3;
+          colors[i3 + 2] = 0.9 + Math.random() * 0.1;
+        }
+      }
+    }
+    
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    
+    // Materials with custom colors
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 0.025,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.8,
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+    });
+    
+    // Mesh
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+    
+    // Interactive floating objects (geometric shapes)
+    const floatingObjectsCount = 10;
+    const floatingObjects = [];
+    
+    const geometries = [
+      new THREE.IcosahedronGeometry(0.3, 0),
+      new THREE.TetrahedronGeometry(0.3, 0),
+      new THREE.OctahedronGeometry(0.3, 0)
+    ];
+    
+    const material = new THREE.MeshBasicMaterial({
+      color: 0x64ffda,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.3
+    });
+    
+    for (let i = 0; i < floatingObjectsCount; i++) {
+      const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+      const mesh = new THREE.Mesh(geometry, material);
+      
+      // Position objects in a wider space
+      const fixedPosition = {
+        x: (Math.random() - 0.5) * 12,
+        y: (Math.random() - 0.5) * 12,
+        z: (Math.random() - 0.5) * 12
+      };
+      
+      mesh.position.set(
+        fixedPosition.x,
+        fixedPosition.y,
+        fixedPosition.z
+      );
+      
+      mesh.rotation.set(
+        Math.random() * Math.PI,
+        Math.random() * Math.PI,
+        Math.random() * Math.PI
+      );
+      
+      mesh.speed = {
+        rotation: {
+          x: Math.random() * 0.01,
+          y: Math.random() * 0.01,
+          z: Math.random() * 0.01
+        },
+        originalPosition: {
+          x: fixedPosition.x,
+          y: fixedPosition.y,
+          z: fixedPosition.z
+        }
+      };
+      
+      scene.add(mesh);
+      floatingObjects.push(mesh);
+    }
+    
+    // Camera positioning
+    camera.position.z = 5;
+    
+    // Mouse movement tracking for interactive background
+    const mouse = {
+      x: 0,
+      y: 0
+    };
+    
+    window.addEventListener('mousemove', (event) => {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+    
+    // Animation loop
+    const animate = () => {
+      requestAnimationFrame(animate);
+      
+      // Calculate scroll position as percentage of viewport height
+      const scrollY = window.scrollY;
+      const scrollPercent = scrollY / window.innerHeight;
+      
+      // Rotate galaxy - add 90 degrees (PI/2) to initial rotation
+      particlesMesh.rotation.x = Math.PI / 2; // 90-degree rotation around X-axis
+      particlesMesh.rotation.y += 0.0005;
+      
+      // Make galaxy breathe slightly
+      const time = Date.now() * 0.0005;
+      
+      // Scale galaxy smaller in hero section, gradually return to normal size when scrolling
+      const heroScaleFactor = 0.7; // 70% of original size when in hero
+      const scaleMultiplier = heroScaleFactor + (scrollPercent * (1 - heroScaleFactor));
+      particlesMesh.scale.set(
+        scaleMultiplier * (1 + Math.sin(time) * 0.05),
+        scaleMultiplier,
+        scaleMultiplier * (1 + Math.sin(time) * 0.05)
+      );
+      
+      // Update floating objects
+      floatingObjects.forEach(obj => {
+        obj.rotation.x += obj.speed.rotation.x;
+        obj.rotation.y += obj.speed.rotation.y;
+        obj.rotation.z += obj.speed.rotation.z;
+        
+        // Create subtle floating animation
+        const objTime = Date.now() * 0.001;
+        const floatAmplitude = 0.1;
+        obj.position.y = obj.speed.originalPosition.y + Math.sin(objTime + obj.speed.originalPosition.x) * floatAmplitude;
+      });
+      
+      // Respond to mouse movement - slight camera movement
+      const targetX = mouse.x * 0.1;
+      const targetY = mouse.y * 0.1;
+      camera.position.x += (targetX - camera.position.x) * 0.05;
+      camera.position.y += (targetY - camera.position.y) * 0.05;
+      
+      renderer.render(scene, camera);
+    };
+    
+    animate();
+    
+    // Scroll interactions
+    let lastScrollY = window.scrollY;
+    let scrollDirection = 0;
+    
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const scrollPercent = scrollY / window.innerHeight;
+      
+      // Determine scroll direction
+      scrollDirection = scrollY > lastScrollY ? 1 : -1;
+      lastScrollY = scrollY;
+      
+      // Rotate galaxy based on scroll (keep the 90 degree rotation)
+      particlesMesh.rotation.x = Math.PI / 2;
+      particlesMesh.rotation.y = scrollY * 0.0005;
+      
+      // Move galaxy slightly based on scroll
+      const scrollFactor = scrollY * 0.001;
+      particlesMesh.position.y = -scrollFactor;
+      
+      // Adjust camera perspective slightly
+      camera.position.z = 5 + (scrollY * 0.001);
+    });
+  </script>
+</body>
+</html>
