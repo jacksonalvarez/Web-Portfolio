@@ -36,6 +36,7 @@ export default function Home() {
         
         #skills h2,
         #projects h2,
+        .story h2,
         .skill-category h3,
         .project-info h3 {
           color: #8b5cf6 !important;
@@ -51,6 +52,7 @@ export default function Home() {
         .hero h1:hover,
         #skills h2:hover,
         #projects h2:hover,
+        .story h2:hover,
         .skill-category h3:hover,
         .project-info h3:hover {
           transform: translateY(-2px);
@@ -90,15 +92,16 @@ export default function Home() {
           transform: scale(1.1);
         }
 
-        /* Desktop Hero Picture Styles */
+        /* Desktop Hero Picture Styles - Fixed */
         .hero-pic {
           border: 4px solid rgba(192, 132, 252, 0.2);
           border-radius: 50%;
           overflow: hidden;
           box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
           transition: transform 0.3s ease;
-          aspect-ratio: 1 / 1;
+          flex-shrink: 0;
           box-sizing: border-box;
+          aspect-ratio: 1 / 1;
         }
 
         .hero-pic:hover {
@@ -106,11 +109,11 @@ export default function Home() {
         }
 
         .hero-pic img {
-          border-radius: 50%;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: center;
+          object-position: center-5;
+          border-radius: 50%;
         }
 
         /* Enhanced Mobile Hero Styles */
@@ -118,7 +121,7 @@ export default function Home() {
           .hero {
             flex-direction: column !important;
             text-align: center !important;
-            padding: 20px 15px 30px 15px !important;
+            padding: 70px 15px 0px 15px !important;
             min-height: 100vh !important;
             display: flex !important;
             align-items: center !important;
@@ -135,7 +138,6 @@ export default function Home() {
 
           .hero-pic {
             order: 1 !important;
-
             margin: 0 auto 25px auto !important;
             flex-shrink: 0 !important;
             border: 4px solid rgba(192, 132, 252, 0.2) !important;
@@ -143,8 +145,8 @@ export default function Home() {
             overflow: hidden !important;
             box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15) !important;
             transition: transform 0.3s ease !important;
-            aspect-ratio: 1 / 1 !important;
             box-sizing: border-box !important;
+            aspect-ratio: 1 / 1 !important;
           }
 
           .hero-pic:hover {
@@ -152,11 +154,11 @@ export default function Home() {
           }
 
           .hero-pic img {
-            border-radius: 50% !important;
             width: 100% !important;
             height: 100% !important;
             object-fit: cover !important;
             object-position: center !important;
+            border-radius: 50% !important;
           }
 
           .hero h1 {
@@ -356,10 +358,10 @@ export default function Home() {
           }
 
           .hero-pic {
-          width: 220px !important;
-            height: 220px !important;
+            width: 280px !important;
+            height: 280px !important;
             margin-bottom: 20px !important;
-            aspect-ratio: 1 / 1 !important; /* Force perfect circle on small mobile too */
+            aspect-ratio: 1 / 1 !important;
           }
 
           #skills, #projects {
@@ -410,7 +412,7 @@ export default function Home() {
             width: 220px !important;
             height: 220px !important;
             margin-bottom: 20px !important;
-            aspect-ratio: 1 / 1 !important; /* Force perfect circle on small mobile too */
+            aspect-ratio: 1 / 1 !important;
           }
 
           .hero-buttons .btn {
@@ -446,6 +448,105 @@ export default function Home() {
             height: 180px !important;
           }
         }
+
+        /* My Story Section Styles */
+        .story {
+          padding: 100px 50px;
+          background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(192, 132, 252, 0.05));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 80vh;
+        }
+
+        .story-content {
+          max-width: 800px;
+          text-align: center;
+        }
+
+        .story h2 {
+          font-size: 3.5rem;
+          margin-bottom: 50px;
+          font-weight: 700;
+        }
+
+        .story-text {
+          display: flex;
+          flex-direction: column;
+          gap: 35px;
+        }
+
+        .story p {
+          font-size: 1.2rem;
+          line-height: 1.8;
+          color:rgb(116, 99, 114);
+          margin: 0;
+        }
+
+        .story .highlight {
+          color: #8b5cf6;
+          font-weight: 600;
+        }
+
+        /* Mobile Story Styles */
+        @media (max-width: 768px) {
+          .story {
+            flex-direction: column !important;
+            text-align: center !important;
+            padding: 80px 15px 80px 15px !important;
+            min-height: 100vh !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(192, 132, 252, 0.05)) !important;
+          }
+
+          .story h2 {
+            font-size: 2.5rem !important;
+            margin-bottom: 40px !important;
+          }
+
+          .story p {
+            font-size: 1.1rem !important;
+            line-height: 1.7 !important;
+            padding: 0 10px !important;
+            color: #4b5563 !important;
+          }
+
+          .story-text {
+            gap: 30px !important;
+          }
+        }
+
+        /* Small Mobile Story Styles */
+        @media (max-width: 480px) {
+          .story {
+            flex-direction: column !important;
+            text-align: center !important;
+            padding: 60px 10px 60px 10px !important;
+            min-height: 100vh !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(192, 132, 252, 0.05)) !important;
+          }
+
+          .story h2 {
+            font-size: 2rem !important;
+            margin-bottom: 30px !important;
+          }
+
+          .story p {
+            font-size: 1rem !important;
+            padding: 0 5px !important;
+            line-height: 1.6 !important;
+            color: #4b5563 !important;
+          }
+
+          .story-text {
+            gap: 25px !important;
+          }
+        }
       `}</style>
       
       <section id="home" className="hero">
@@ -472,12 +573,11 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="hero-pic">
-          <img src="/picfs.png" alt="Jackson Alvarez" style={{ transform: 'scale(1.1)', objectFit: 'cover', width: '100%', height: '100%' }} />
+        <div className="hero-pic" style = {{ aspectRatio: '1 / 1' }}>
+          <img src="/picfs.png" alt="Jackson Alvarez" style={{ transform: 'scale(1.1)', aspectRatio: '1 / 1'}} />
         </div>
       </section>
-          
-      <section id="skills">
+<section id="skills">
         <h2>Skills & Expertise</h2>
         <div className="skills">
           <div className="skill-category">
@@ -508,7 +608,7 @@ export default function Home() {
             <h3>Soft Skills</h3>
             <ul className="skill-list">
               <li>Easy to train</li>
-              <li>Strong mathmatics</li>
+              <li>Strong mathematics</li>
               <li>Data science</li>
               <li>Team collaboration</li>
               <li>Project management</li>
@@ -517,10 +617,53 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section id="story" className="story">
+        <div className="story-content">
+          <h2>My Story</h2>
+          <div className="story-text">
+            <p>
+              I graduated from <span className="highlight">Appalachian State University</span> with a <span className="highlight">Bachelor's in Computer Science (6/27/25)</span> and a minor in Mathematics, complemented by a software development internship and two years as a student ITS-Systems research employee. I believe this unique combination of academic foundation and practical experience equips me with a strong understanding of both theoretical concepts and how to apply them effectively in real-world scenarios.
+            </p>
+            <p>
+              Currently, I'm building <span className="highlight">VibeCodeCLI</span>, an AI-powered development suite that revolutionizes how developers work with code. This Python-based tool leverages <span className="highlight">ChatGPT-4</span> to test, compile, and execute code directly from the command line, supporting <span className="highlight">over 10+ programming languages</span>. It's designed to bridge the gap between AI capabilities and real-world development workflows.
+            </p>
+            <p>
+              Beyond my professional focus, I'm a passionate <span className="highlight">hobbyist game developer</span> with 5 years of Unity experience. Currently, I'm working on <span className="highlight">"The Lighthouse"</span>, a horror movie parody story game inspired by Willem Dafoe's iconic film. Unity has become my favorite development workflow due to its <span className="highlight">flashy plug-and-play nature</span> and the never-ending learning experience it provides. I spend my free time crafting small products and applications, always with the intention of improving my craft and learning best practices in software development.
+            </p>
+            <p>
+              My journey in technology began at <span className="highlight">11 years old</span> when I first discovered programming. Now at 21, I've cultivated nearly <span className="highlight">a decade of curiosity</span> and hands-on experience in software development. This early passion has driven me to continuously explore new technologies and push the boundaries of what's possible with code.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section id="projects">
         <h2>Featured Projects</h2>
         <div className="projects">
+                    <div className="project-card">
+            <div className="project-img">
+              <img
+                src="/p3.png"
+                alt="VibeCodeCLI Project"
+                style={{ width: '100%', height: '150%', transform: 'translate(0px, 0px)'}}
+              />
+            </div>
+            <div className="project-info">
+              <h3>VibeCodeCLI</h3>
+              <p>An AI-powered development suite that revolutionizes how developers work with code. Features recursive code generation with auto-compilation testing, dynamic token allocation, and intelligent prompt engineering for 10+ programming languages.</p>
+              <div className="tech-stack">
+                <span className="tech">LLM Fine-Tuning</span>
+                <span className="tech">Dynamic Token Allocation</span>
+                <span className="tech">Context Model</span>
+                <span className="tech">Clean CLI Development</span>
+                <span className="tech">100% Python</span>
+                <span className="tech">Well Documented</span>
+
+
+              </div>
+              <a href="https://github.com/jacksonalvarez/VibeCodeCLI" className="btn" target="_blank">View Project</a>
+            </div>
+          </div>
           <div className="project-card">
             <div className="project-img">
               <img
@@ -529,7 +672,7 @@ export default function Home() {
                 alt="2D Drawing Engine Project"
                 style={{ width: '100%', height: '150%', transform: 'translate(0px, 0px)'}}
               />
-            </div>
+            </div> 
             <div className="project-info">
               <h3>2D Drawing Engine (Haskell)</h3>
               <p>Developed a functional graphics engine to explore declarative rendering and recursion.</p>
@@ -547,9 +690,10 @@ export default function Home() {
               <img
                 src="/p2.png"
                 alt="Web Portfolio Project"
-                style={{ width: '100%', height: 'auto' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'translate(0px, 0px)'}}
               />
             </div>
+
             <div className="project-info">
               <h3>Web Portfolio</h3>
               <p>Built a personal website to showcase projects and practice modern web development. No Bootstrap, just custom CSS.</p>
@@ -564,24 +708,7 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="project-card">
-            <div className="project-img">
-              <img
-                src="/p3.jpg"
-                alt="y86-64 Simulator Project"
-                style={{ width: '100%', height: '150%', transform: 'translate(0px, 0px)'}}
-              />
-            </div>
-            <div className="project-info">
-              <h3>y86-64 simulator and compiler</h3>
-              <p>Implemented a low-level simulator and compiler to understand assembly and CPU architecture. (I am not allowed to share code.)</p>
-              <div className="tech-stack">
-                <span className="tech">C/C++</span>
-                <span className="tech">Assembly</span>
-                <span className="tech">Computer Architecture</span>
-              </div>
-            </div>
-          </div>
+
         </div>
       </section>
       <Analytics/>
