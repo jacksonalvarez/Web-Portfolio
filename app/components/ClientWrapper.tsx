@@ -36,16 +36,25 @@ const ClientWrapper: React.FC<ClientWrapperProps> = ({ openContactModal }) => {
           max-width: 1500px;
           margin: 0 auto;
           padding: 0 2rem;
+          /* create a stacking context so backdrop-filter on section children can access the canvas behind */
+          isolation: isolate;
         }
 
         .section-container {
           margin: 2rem 0;
           width: 100%;
-          background: #1c0128e7;
-          border-radius: 16px;
-          box-shadow: 0 5px 35px #356035fc;
-          backdrop-filter: blur(15px);
-          -webkit-backdrop-filter: blur(25px);
+          max-width: 2500px;
+          /* use rgba for wider compatibility with alpha channel */
+          background: rgba(0, 0, 0, 0.99);
+          border-radius: 4px;
+          
+          box-shadow: 0 5px 35px #111111ff;
+          backdrop-filter: blur(35px);
+          -webkit-backdrop-filter: blur(35px);
+          /* Make sure the element participates in stacking so backdrop-filter can access the backdrop
+             (backdrop-filter only blurs elements behind it within the same stacking context). */
+          position: relative;
+          z-index: 1;
           padding: 4rem;
         }
 

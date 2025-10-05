@@ -21,7 +21,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
   background: radial-gradient(
     circle at center,
@@ -39,7 +39,7 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
   backdrop-filter: blur(calc(var(--radius) * 0.5px));
   -webkit-backdrop-filter: blur(calc(var(--radius) * 0.5px));
@@ -62,7 +62,8 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  /* place canvas behind content but within same stacking context */
+  z-index: 0;
 }
 
 #content {
@@ -446,6 +447,7 @@ main {
   overflow: hidden;
   animation: modalFadeIn 0.3s ease-out;
   transform: translateY(0);
+
 }
 
 .modal-header {

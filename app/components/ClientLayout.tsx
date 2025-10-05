@@ -153,7 +153,12 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
 
   return (
     <>
-      <canvas ref={canvasRef} id="bg" style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}></canvas>
+      <canvas
+        ref={canvasRef}
+        id="bg"
+        style={{ position: 'fixed', top: 0, left: 0, zIndex: 0, pointerEvents: 'none' }}
+        aria-hidden="true"
+      />
       <div id="content">
         <header>
           <nav>

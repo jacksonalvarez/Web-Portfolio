@@ -204,7 +204,7 @@ const Hero: React.FC<HeroProps> = ({ openContactModal }) => (
       }
       .hero h1 {
         color: #d9ead8ff !important;
-        background: #1f8347ff;
+        background: #b9c0bcff;
         background-size: 200% 200%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -219,7 +219,7 @@ const Hero: React.FC<HeroProps> = ({ openContactModal }) => (
       }
       .hero h1:hover {
         transform: translateY(-2px);
-        text-shadow: 0 4px 8px rgba(43, 124, 54, 0.46);
+        text-shadow: 0 4px 8px rgba(123, 137, 125, 0.46);
       }
       .hero h3 {
         font-size: 1.5rem;
