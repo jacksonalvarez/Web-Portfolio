@@ -2,11 +2,16 @@
 const nextConfig = {
   transpilePackages: ['three'],
   webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      'three': require.resolve('three')
-    }
-    return config
+    // Enable loading of external JavaScript files
+    config.resolve.extensions.push('.js');
+    
+    // Configure module rules for Three.js
+    config.module.rules.push({
+      test: /three\/examples\/jsm/,
+      type: 'javascript/auto'
+    });
+
+    return config;
   }
 }
 
