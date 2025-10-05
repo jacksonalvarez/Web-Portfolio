@@ -8,10 +8,56 @@
 
 body {
   overflow-x: hidden;
-  background-color: #121212;
+  background-color: #1a1a1a;
   color: #fff;
+  position: relative;
 }
 
+/* Vignette and blur effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    transparent 45%,
+    rgba(0, 0, 0, 0.73) 100%
+  );
+}
+
+/* Logarithmic blur effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  backdrop-filter: blur(calc(var(--radius) * 0.5px));
+  -webkit-backdrop-filter: blur(calc(var(--radius) * 0.5px));
+  mask-image: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 0, 0, calc(var(--radius) * 0.01)) 45%,
+    black 100%
+  );
+  --radius: 20; /* Adjust this value to control blur intensity */
+}
+h {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #4edd6d;
+        font-weight: 500;
+        text-align: left;
+      }
 canvas {
   position: fixed;
   top: 0;
@@ -34,7 +80,7 @@ header {
 .logo {
   font-size: 2rem;
   font-weight: bold;
-  background: linear-gradient(to right, #9d4edd, #6a0dad);
+  background: linear-gradient(to right, #23d520, #1b9119);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -129,8 +175,8 @@ nav a:hover:after {
 .btn {
   display: inline-block;
   padding: 1rem 2rem;
-  background: linear-gradient(to right, #9d4edd, #6a0dad);
-  color: white;
+  background: #1f8347;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 50px;
   font-size: 1rem;
@@ -157,16 +203,16 @@ nav a:hover:after {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(157, 78, 221, 0.15);
-  color: #9d4edd;
+  background: rgba(35, 213, 32, 0.15);
+  color: #23d520;
   transition: all 0.3s ease;
-  border: 1px solid rgba(157, 78, 221, 0.3);
+  border: 1px solid rgba(35, 213, 32, 0.3);
 }
 
 .social-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
-  background: linear-gradient(to right, #9d4edd, #6a0dad);
+  box-shadow: 0 5px 15px rgba(35, 213, 32, 0.3);
+  background: linear-gradient(to right, #3abf00, #3abf00);
   color: white;
 }
 
@@ -254,8 +300,8 @@ section h3 {
 }
 
 .tech {
-  background: rgba(157, 78, 221, 0.1);
-  color: #9d4edd;
+  background: rgba(35, 213, 32, 0.1);
+  color: #23d520;
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -302,7 +348,7 @@ section h3 {
   content: "▹";
   position: absolute;
   left: 0;
-  color: #6a0dad;
+  color: #1b9119;
 }
 
 .contact {
@@ -333,7 +379,7 @@ section h3 {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: linear-gradient(to right, #9d4edd, #6a0dad);
+  background: linear-gradient(to right, #23d520, #1b9119);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -394,16 +440,16 @@ main {
   max-width: 500px;
   margin: 0 1rem;
   background-color: #1a1a1a;
-  border: 2px solid rgba(157, 78, 221, 0.3);
+  border: 2px solid rgba(35, 213, 32, 0.3);
   border-radius: 12px;
-  box-shadow: 0 0 30px rgba(157, 78, 221, 0.4);
+  box-shadow: 0 0 30px rgba(35, 213, 32, 0.4);
   overflow: hidden;
   animation: modalFadeIn 0.3s ease-out;
   transform: translateY(0);
 }
 
 .modal-header {
-  background: linear-gradient(to right, #9d4edd, #6a0dad);
+  background: linear-gradient(145deg, #4edd7b03, #0dad2552);
   padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -456,8 +502,8 @@ main {
 
 .form-control:focus {
   outline: none;
-  border-color: #9d4edd;
-  box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.25);
+  border-color: #23d520;
+  box-shadow: 0 0 0 3px rgba(35, 213, 32, 0.25);
 }
 
 .form-actions {
@@ -493,7 +539,7 @@ main {
 
 .btn-submit:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(157, 78, 221, 0.4);
+  box-shadow: 0 6px 15px rgba(35, 213, 32, 0.4);
 }
 
 .btn-submit:disabled {

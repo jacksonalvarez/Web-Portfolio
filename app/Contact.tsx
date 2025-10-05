@@ -67,6 +67,164 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   return (
     <div className="modal-overlay">
+      <style jsx>{`
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.75);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+          backdrop-filter: blur(5px);
+        }
+
+        .modal-container {
+          background: #13131363;
+          border-radius: 10px;
+          padding: 2rem;
+          width: 90%;
+          max-width: 500px;
+          position: relative;
+          box-shadow: 0 5px 15px #13131363;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        .modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 2rem;
+          border-bottom: 1px solid #23d520;
+          padding-bottom: 1rem;
+        }
+
+        .modal-header h3 {
+          color: #23d520;
+          font-size: 1.5rem;
+          margin: 0;
+        }
+
+        .modal-close-btn {
+          background: none;
+          border: none;
+          color: #23d520;
+          cursor: pointer;
+          padding: 0.5rem;
+          transition: transform 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+          transform: scale(1.1);
+          color: #1b9119;
+        }
+
+        .modal-body {
+          color: #fff;
+        }
+
+        .form-group {
+          margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+          display: block;
+          margin-bottom: 0.5rem;
+          color: #23d520;
+        }
+
+        .form-control {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #23d520;
+          border-radius: 6px;
+          background: #13131363;
+          color: #fff;
+          transition: border-color 0.2s ease;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        .form-control:focus {
+          outline: none;
+          border-color: #1b9119;
+          box-shadow: 0 0 0 2px rgba(35, 213, 32, 0.2);
+        }
+
+        .form-actions {
+          display: flex;
+          gap: 1rem;
+          justify-content: flex-end;
+          margin-top: 2rem;
+        }
+
+        .btn-submit, .btn-cancel {
+          padding: 0.75rem 1.5rem;
+          border-radius: 6px;
+          font-weight: 600;
+          transition: all 0.2s ease;
+        }
+
+        .btn-submit {
+          background: #1f8347;
+          border: none;
+          color: rgb(0, 0, 0);
+          border-radius: 50px;
+          font-weight: bold;
+          padding: 1rem 2rem;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-submit:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-submit:disabled {
+          background: #1b9119;
+          opacity: 0.7;
+          cursor: not-allowed;
+          transform: none;
+          box-shadow: none;
+        }        .btn-cancel {
+          background: transparent;
+          border: 1px solid #23d520;
+          color: #23d520;
+        }
+
+        .btn-cancel:hover {
+          background: rgba(35, 213, 32, 0.1);
+        }
+
+        .error-message {
+          color: #ff4444;
+          background: rgba(255, 68, 68, 0.1);
+          border: 1px solid #ff4444;
+          padding: 0.75rem;
+          border-radius: 6px;
+          margin-bottom: 1rem;
+        }
+
+        .success-container {
+          text-align: center;
+          padding: 2rem;
+        }
+
+        .success-icon {
+          color: #23d520;
+          font-size: 3rem;
+          margin-bottom: 1rem;
+        }
+
+        .success-message {
+          color: #fff;
+          margin-bottom: 2rem;
+        }
+      `}</style>
       {/* Modal Container */}
       <div className="modal-container">
         {/* Modal Header */}
