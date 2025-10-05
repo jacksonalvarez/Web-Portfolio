@@ -117,7 +117,6 @@ const Projects: React.FC = () => {
           border: 1px solid rgba(139, 92, 246, 0.1);
           box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
           overflow: hidden;
-          min-height: 400px;
           height: auto;
           display: flex;
           flex-direction: column;

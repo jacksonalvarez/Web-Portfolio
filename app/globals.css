@@ -261,6 +261,21 @@ section h3 {
 
 }
 
+@media (max-width: 1100px) {
+.project-card {
+  background: #13131363;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px #13131363;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 0px; /* Increase the minimum width */
+
+}
+}
+
+
 .project-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
