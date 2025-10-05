@@ -24,7 +24,7 @@ const Story: React.FC = () => (
     </div>
     <style jsx>{`
       .story {
-        background: rgba(32, 32, 32, 0.95);
+        background: rgb(5 5 5 / 95%);
         border-radius: 3px;
         padding: 3rem 2rem;
         box-shadow: 1px 4px 4px rgba(34, 62, 35, 1);
