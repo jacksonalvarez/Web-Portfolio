@@ -1,7 +1,7 @@
 'use client';
 
 import { signIn, useSession } from 'next-auth/react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function Login() {
@@ -16,15 +16,18 @@ export default function Login() {
   }, [session, router]);
 
   const [error, setError] = useState<string>('');
-  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const error = searchParams?.get('error');
-    if (error) {
-      console.error('Auth error:', error);
-      setError('Authentication failed. Please try again.');
+    // Check for error in URL without using useSearchParams during SSR
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const errorParam = urlParams.get('error');
+      if (errorParam) {
+        console.error('Auth error:', errorParam);
+        setError('Authentication failed. Please try again.');
+      }
     }
-  }, [searchParams]);
+  }, []);
 
   const handleGoogleSignIn = async () => {
     try {

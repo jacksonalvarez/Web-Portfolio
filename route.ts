@@ -46,17 +46,17 @@ export const authOptions: NextAuthOptions = {
       console.log('JWT callback:', { token, account, profile });
       if (account && profile) {
         token.accessToken = account.access_token;
-        token.email_verified = profile.email_verified;
-        token.hd = profile.hd;
+        token.email_verified = (profile as any).email_verified;
+        token.hd = (profile as any).hd;
       }
       return token;
     },
     async session({ session, token }) {
       console.log('Session callback:', { session, token });
       if (session?.user) {
-        session.user.email_verified = token.email_verified;
-        session.user.hd = token.hd;
-        session.accessToken = token.accessToken;
+        (session.user as any).email_verified = token.email_verified as boolean;
+        (session.user as any).hd = token.hd as string;
+        (session as any).accessToken = token.accessToken as string;
       }
       return session;
     },

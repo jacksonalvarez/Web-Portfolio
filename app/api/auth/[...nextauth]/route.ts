@@ -16,7 +16,7 @@ Object.entries(requiredEnvVars).forEach(([key, value]) => {
   }
 });
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   debug: true, // Enable debug messages
   providers: [
     GoogleProvider({
