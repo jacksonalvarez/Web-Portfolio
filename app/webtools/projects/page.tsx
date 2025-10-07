@@ -39,17 +39,102 @@ export default function Projects() {
     },
     {
       id: '3',
-      name: 'Test Project',
-      description: 'A sample project to demonstrate the WebTools interface',
-      lastUpdated: '2025-10-04',
+      name: 'EverBlue Training Platform',
+      description: 'Learning management system for renewable energy training',
+      lastUpdated: '2025-10-07',
+      language: 'React',
+      visibility: 'work',
+      repoType: 'work'
+    },
+    {
+      id: '4',
+      name: 'Internal Admin Dashboard',
+      description: 'Company internal tools and analytics dashboard',
+      lastUpdated: '2025-10-06',
+      language: 'TypeScript',
+      visibility: 'work',
+      repoType: 'work'
+    },
+    {
+      id: '5',
+      name: 'Personal AI Assistant',
+      description: 'Private AI-powered productivity tool',
+      lastUpdated: '2025-10-05',
       language: 'Python',
+      visibility: 'private',
+      repoType: 'personal'
+    },
+    {
+      id: '6',
+      name: 'Open Source Library',
+      description: 'A public JavaScript utility library for developers',
+      lastUpdated: '2025-10-04',
+      language: 'JavaScript',
+      visibility: 'public',
+      repoType: 'personal'
+    },
+    {
+      id: '7',
+      name: 'Customer Portal',
+      description: 'EverBlue customer self-service portal',
+      lastUpdated: '2025-10-03',
+      language: 'Vue.js',
       visibility: 'work',
       repoType: 'work'
     }
   ]);
 
-  // If not authenticated or still loading, show login prompt
-  if (status === 'unauthenticated' || status === 'loading') {
+  // Handle loading state
+  if (status === 'loading') {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <h2>Loading...</h2>
+        <p>Checking authentication status...</p>
+        
+        <style jsx>{`
+          .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-align: center;
+            padding: 2rem;
+          }
+          
+          .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #30363d;
+            border-top: 4px solid #23d520;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+          }
+          
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          
+          .loading-container h2 {
+            color: #23d520;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+          }
+          
+          .loading-container p {
+            color: #8b949e;
+            font-size: 1rem;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  // If not authenticated, show login prompt
+  if (status === 'unauthenticated') {
     return (
       <div className="login-prompt">
         <h2>Authentication Required</h2>
@@ -122,10 +207,13 @@ export default function Projects() {
     }
     
     // These properties are guaranteed by Google OAuth
-    const { email = '', email_verified } = session.user;
+    const email = session.user?.email || '';
+    const email_verified = (session.user as any)?.email_verified;
+    const hd = (session.user as any)?.hd;
+    
     console.log('User email:', email);
     console.log('Email verified:', email_verified);
-    console.log('Hosted domain:', session.user.hd);
+    console.log('Hosted domain:', hd);
     
     // Only trust verified emails from Google OAuth
     if (!email_verified) {
@@ -133,17 +221,22 @@ export default function Projects() {
       return 'public';
     }
     
-    // Admin/owner check - use environment variable for security
-    if (email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+    // Admin/owner check - hardcode for security (you can move this to server-side later)
+    const adminEmails = ['alvarezjd404@gmail.com'];
+    if (email && adminEmails.includes(email)) {
       console.log('Admin user detected');
       return 'admin';
     }
 
     // Work domain check using Google OAuth's hosted_domain
-    const isWorkDomain = session.user.hd === process.env.NEXT_PUBLIC_WORK_DOMAIN;
+    const workDomains = ['everbluetraining.com', 'goeverblue.com']; // Add your work domains here
+    const isWorkDomain = workDomains.some(domain => 
+      (hd && hd === domain) || (email && email.endsWith(`@${domain}`))
+    );
+    
     console.log('Work domain check:', {
-      userDomain: session.user.hd,
-      expectedDomain: process.env.NEXT_PUBLIC_WORK_DOMAIN,
+      userDomain: hd,
+      email: email,
       isWorkDomain
     });
     
@@ -152,7 +245,8 @@ export default function Projects() {
       return 'work';
     }
 
-    console.log('Public user detected');
+    // For other verified emails, give public access
+    console.log('Public user detected (verified email but not admin/work)');
     return 'public';
   };
 
@@ -468,54 +562,4 @@ export default function Projects() {
       `}</style>
     </div>
   );
-}
-
-async function redirect({ url, baseUrl }) {
-  console.log('Redirect callback:', { url, baseUrl });
-  
-  // After successful login, always redirect to projects page
-  if (url === baseUrl || url === `${baseUrl}/` || url === '/') {
-    const projectsUrl = `${baseUrl}/webtools/projects`;
-    console.log('Redirecting to projects page:', projectsUrl);
-    return projectsUrl;
-  }
-  
-  // If someone specifically requested /webtools/projects, allow it
-  if (url === '/webtools/projects' || url === `${baseUrl}/webtools/projects`) {
-    const projectsUrl = `${baseUrl}/webtools/projects`;
-    console.log('Direct projects page redirect:', projectsUrl);
-    return projectsUrl;
-  }
-  
-  // Handle relative URLs
-  if (url.startsWith("/")) {
-    // If it's a webtools route, allow it
-    if (url.startsWith("/webtools")) {
-      const fullUrl = `${baseUrl}${url}`;
-      console.log('Webtools route redirect:', fullUrl);
-      return fullUrl;
-    }
-    // For other relative URLs, redirect to projects
-    const projectsUrl = `${baseUrl}/webtools/projects`;
-    console.log('Fallback to projects for relative URL:', projectsUrl);
-    return projectsUrl;
-  }
-
-  // Handle absolute URLs that match our base
-  if (url.startsWith(baseUrl)) {
-    // If it's a webtools URL, allow it
-    if (url.includes('/webtools')) {
-      console.log('Absolute webtools URL redirect:', url);
-      return url;
-    }
-    // Otherwise redirect to projects
-    const projectsUrl = `${baseUrl}/webtools/projects`;
-    console.log('Fallback to projects for absolute URL:', projectsUrl);
-    return projectsUrl;
-  }
-
-  // Default fallback - redirect to projects page
-  const projectsUrl = `${baseUrl}/webtools/projects`;
-  console.log('Default fallback redirect to projects:', projectsUrl);
-  return projectsUrl;
 }

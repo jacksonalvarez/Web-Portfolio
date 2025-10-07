@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
     error: '/webtools/login',
   },
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account, profile }) {
       console.log('Sign in callback:', { user, account, profile });
       return true;
     },
@@ -57,91 +57,31 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         (session.user as any).email_verified = token.email_verified as boolean;
         (session.user as any).hd = token.hd as string;
-        (session as any).accessToken = token.accessToken as string;
+        (session.user as any).accessToken = token.accessToken as string;
       }
       return session;
     },
     async redirect({ url, baseUrl }) {
       console.log('Redirect callback:', { url, baseUrl });
       
-      // Handle the specific issue: if redirecting to login with callbackUrl, extract the callback and redirect there
-      if (url.includes('/webtools/login') && url.includes('callbackUrl=')) {
-        try {
-          const urlObj = new URL(url, baseUrl);
-          const callbackUrl = urlObj.searchParams.get('callbackUrl');
-          if (callbackUrl) {
-            const decodedCallback = decodeURIComponent(callbackUrl);
-            if (decodedCallback === '/webtools/projects') {
-              const projectsUrl = `${baseUrl}/webtools/projects`;
-              console.log('Extracted callback URL, redirecting to projects:', projectsUrl);
-              return projectsUrl;
-            }
-            // For other webtools callbacks, allow them
-            if (decodedCallback.startsWith('/webtools')) {
-              const fullUrl = `${baseUrl}${decodedCallback}`;
-              console.log('Extracted callback URL, redirecting to:', fullUrl);
-              return fullUrl;
-            }
-          }
-        } catch (error) {
-          console.error('Error parsing callback URL:', error);
-        }
-      }
-      
-      // After successful login, always redirect to projects page
-      if (url === baseUrl || url === `${baseUrl}/` || url === '/') {
+      // If the URL is specifically webtools/projects or contains it, redirect there
+      if (url.includes('/webtools/projects') || url === '/webtools/projects') {
         const projectsUrl = `${baseUrl}/webtools/projects`;
-        console.log('Default redirect to projects page:', projectsUrl);
+        console.log('Redirecting to projects page:', projectsUrl);
         return projectsUrl;
       }
       
-      // If someone specifically requested /webtools/projects, allow it
-      if (url === '/webtools/projects' || url === `${baseUrl}/webtools/projects`) {
-        const projectsUrl = `${baseUrl}/webtools/projects`;
-        console.log('Direct projects page redirect:', projectsUrl);
-        return projectsUrl;
+      // For webtools routes, allow them
+      if (url.startsWith('/webtools') || url.includes('/webtools')) {
+        if (url.startsWith('/')) {
+          return `${baseUrl}${url}`;
+        }
+        return url.startsWith(baseUrl) ? url : `${baseUrl}/webtools/projects`;
       }
       
-      // Handle relative URLs
-      if (url.startsWith("/")) {
-        // If it's a webtools route, allow it
-        if (url.startsWith("/webtools/projects")) {
-          const fullUrl = `${baseUrl}${url}`;
-          console.log('Projects route redirect:', fullUrl);
-          return fullUrl;
-        }
-        if (url.startsWith("/webtools")) {
-          const fullUrl = `${baseUrl}${url}`;
-          console.log('Other webtools route redirect:', fullUrl);
-          return fullUrl;
-        }
-        // For other relative URLs, redirect to projects
-        const projectsUrl = `${baseUrl}/webtools/projects`;
-        console.log('Fallback to projects for relative URL:', projectsUrl);
-        return projectsUrl;
-      }
-
-      // Handle absolute URLs that match our base
-      if (url.startsWith(baseUrl)) {
-        // If it's specifically the projects URL, allow it
-        if (url === `${baseUrl}/webtools/projects` || url.endsWith('/webtools/projects')) {
-          console.log('Absolute projects URL redirect:', url);
-          return url;
-        }
-        // If it's other webtools URLs, allow them
-        if (url.includes('/webtools/')) {
-          console.log('Absolute webtools URL redirect:', url);
-          return url;
-        }
-        // Otherwise redirect to projects
-        const projectsUrl = `${baseUrl}/webtools/projects`;
-        console.log('Fallback to projects for absolute URL:', projectsUrl);
-        return projectsUrl;
-      }
-
-      // Default fallback - redirect to projects page
+      // Default: redirect to projects page after successful login
       const projectsUrl = `${baseUrl}/webtools/projects`;
-      console.log('Default fallback redirect to projects:', projectsUrl);
+      console.log('Default redirect to projects page:', projectsUrl);
       return projectsUrl;
     }
   }

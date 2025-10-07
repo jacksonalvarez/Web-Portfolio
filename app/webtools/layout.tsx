@@ -1,16 +1,19 @@
 'use client';
 
+import { SessionProvider } from 'next-auth/react';
+
 export default function WebToolsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="webtools-layout">
-      <div className="webtools-overlay" />
-      <div className="webtools-content">
-        {children}
-      </div>
+    <SessionProvider>
+      <div className="webtools-layout">
+        <div className="webtools-overlay" />
+        <div className="webtools-content">
+          {children}
+        </div>
       <style jsx>{`
         .webtools-layout {
           position: fixed;
@@ -60,6 +63,7 @@ export default function WebToolsLayout({
           border: 2px solid #0d1117;
         }
       `}</style>
-    </div>
+      </div>
+    </SessionProvider>
   );
 }
