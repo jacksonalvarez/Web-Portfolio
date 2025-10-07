@@ -165,10 +165,8 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
             <ul>
               <li><a href="#home">Home</a></li>
               <li><a href="#" onClick={(e) => { e.preventDefault(); openContactModal(); }}>Contact</a></li>
-              <li className="coming-soon">
-                <span className="nav-item">Web Tools
-                  <span className="tooltip">Coming Soon!</span>
-                </span>
+              <li>
+                <a href="/webtools">Web Tools</a>
               </li>
               <li className="coming-soon">
                 <span className="nav-item">Courses
