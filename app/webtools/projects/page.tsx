@@ -113,25 +113,46 @@ export default function Projects() {
 
   // Get user role based on OAuth session data
   const getUserRole = () => {
-    if (!session?.user) return 'public';
+    console.log('Session in getUserRole:', session);
+    console.log('Session user:', session?.user);
+    
+    if (!session?.user) {
+      console.log('No session user found');
+      return 'public';
+    }
     
     // These properties are guaranteed by Google OAuth
     const { email = '', email_verified } = session.user;
+    console.log('User email:', email);
+    console.log('Email verified:', email_verified);
+    console.log('Hosted domain:', session.user.hd);
     
     // Only trust verified emails from Google OAuth
-    if (!email_verified) return 'public';
+    if (!email_verified) {
+      console.log('Email not verified');
+      return 'public';
+    }
     
     // Admin/owner check - use environment variable for security
     if (email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+      console.log('Admin user detected');
       return 'admin';
     }
 
     // Work domain check using Google OAuth's hosted_domain
     const isWorkDomain = session.user.hd === process.env.NEXT_PUBLIC_WORK_DOMAIN;
+    console.log('Work domain check:', {
+      userDomain: session.user.hd,
+      expectedDomain: process.env.NEXT_PUBLIC_WORK_DOMAIN,
+      isWorkDomain
+    });
+    
     if (isWorkDomain) {
+      console.log('Work user detected');
       return 'work';
     }
 
+    console.log('Public user detected');
     return 'public';
   };
 
@@ -447,4 +468,54 @@ export default function Projects() {
       `}</style>
     </div>
   );
+}
+
+async function redirect({ url, baseUrl }) {
+  console.log('Redirect callback:', { url, baseUrl });
+  
+  // After successful login, always redirect to projects page
+  if (url === baseUrl || url === `${baseUrl}/` || url === '/') {
+    const projectsUrl = `${baseUrl}/webtools/projects`;
+    console.log('Redirecting to projects page:', projectsUrl);
+    return projectsUrl;
+  }
+  
+  // If someone specifically requested /webtools/projects, allow it
+  if (url === '/webtools/projects' || url === `${baseUrl}/webtools/projects`) {
+    const projectsUrl = `${baseUrl}/webtools/projects`;
+    console.log('Direct projects page redirect:', projectsUrl);
+    return projectsUrl;
+  }
+  
+  // Handle relative URLs
+  if (url.startsWith("/")) {
+    // If it's a webtools route, allow it
+    if (url.startsWith("/webtools")) {
+      const fullUrl = `${baseUrl}${url}`;
+      console.log('Webtools route redirect:', fullUrl);
+      return fullUrl;
+    }
+    // For other relative URLs, redirect to projects
+    const projectsUrl = `${baseUrl}/webtools/projects`;
+    console.log('Fallback to projects for relative URL:', projectsUrl);
+    return projectsUrl;
+  }
+
+  // Handle absolute URLs that match our base
+  if (url.startsWith(baseUrl)) {
+    // If it's a webtools URL, allow it
+    if (url.includes('/webtools')) {
+      console.log('Absolute webtools URL redirect:', url);
+      return url;
+    }
+    // Otherwise redirect to projects
+    const projectsUrl = `${baseUrl}/webtools/projects`;
+    console.log('Fallback to projects for absolute URL:', projectsUrl);
+    return projectsUrl;
+  }
+
+  // Default fallback - redirect to projects page
+  const projectsUrl = `${baseUrl}/webtools/projects`;
+  console.log('Default fallback redirect to projects:', projectsUrl);
+  return projectsUrl;
 }

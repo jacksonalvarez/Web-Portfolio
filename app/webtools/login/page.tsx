@@ -1,8 +1,8 @@
 'use client';
 
 import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function Login() {
   const { data: session, status } = useSession();
@@ -10,12 +10,40 @@ export default function Login() {
 
   useEffect(() => {
     if (session) {
-      router.push('/webtools/projects');
+      console.log('Session detected:', session);
+      router.replace('/webtools/projects');
     }
   }, [session, router]);
 
-  const handleGoogleSignIn = () => {
-    signIn('google', { callbackUrl: '/webtools/projects' });
+  const [error, setError] = useState<string>('');
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const error = searchParams?.get('error');
+    if (error) {
+      console.error('Auth error:', error);
+      setError('Authentication failed. Please try again.');
+    }
+  }, [searchParams]);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setError('');
+      const result = await signIn('google', { 
+        callbackUrl: '/webtools/projects',
+        redirect: false
+      });
+      console.log('Sign in result:', result);
+      
+      if (result?.error) {
+        setError(result.error);
+      } else if (result?.url) {
+        router.push(result.url);
+      }
+    } catch (err) {
+      console.error('Sign in error:', err);
+      setError('Failed to initiate sign in. Please try again.');
+    }
   };
 
   if (status === 'loading') {
