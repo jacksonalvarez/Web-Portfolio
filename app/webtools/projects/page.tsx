@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 
 interface Project {
   id: string;
+  slug: string; // URL-friendly route name
   name: string;
   description: string;
   lastUpdated: string;
@@ -21,6 +22,7 @@ export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([
     {
       id: '1',
+      slug: 'web-portfolio',
       name: 'Web Portfolio',
       description: 'A modern portfolio website built with Next.js and Three.js',
       lastUpdated: '2025-10-06',
@@ -30,6 +32,17 @@ export default function Projects() {
     },
     {
       id: '2',
+      slug: 'budgeting-tracker',
+      name: 'Personal Budgeting Tracker',
+      description: 'A comprehensive budgeting tool to track income, expenses, and financial goals with custom themes',
+      lastUpdated: '2025-10-19',
+      language: 'TypeScript',
+      visibility: 'public',
+      repoType: 'personal'
+    },
+    {
+      id: '3',
+      slug: 'swe-spaces-blog',
       name: 'SWE Spaces Blog',
       description: 'A developer blog about software engineering and programming',
       lastUpdated: '2025-10-05',
@@ -38,7 +51,8 @@ export default function Projects() {
       repoType: 'personal'
     },
     {
-      id: '3',
+      id: '4',
+      slug: 'everblue-training',
       name: 'EverBlue Training Platform',
       description: 'Learning management system for renewable energy training',
       lastUpdated: '2025-10-07',
@@ -47,7 +61,8 @@ export default function Projects() {
       repoType: 'work'
     },
     {
-      id: '4',
+      id: '5',
+      slug: 'admin-dashboard',
       name: 'Internal Admin Dashboard',
       description: 'Company internal tools and analytics dashboard',
       lastUpdated: '2025-10-06',
@@ -56,7 +71,8 @@ export default function Projects() {
       repoType: 'work'
     },
     {
-      id: '5',
+      id: '6',
+      slug: 'ai-assistant',
       name: 'Personal AI Assistant',
       description: 'Private AI-powered productivity tool',
       lastUpdated: '2025-10-05',
@@ -65,7 +81,8 @@ export default function Projects() {
       repoType: 'personal'
     },
     {
-      id: '6',
+      id: '7',
+      slug: 'js-utilities',
       name: 'Open Source Library',
       description: 'A public JavaScript utility library for developers',
       lastUpdated: '2025-10-04',
@@ -74,7 +91,8 @@ export default function Projects() {
       repoType: 'personal'
     },
     {
-      id: '7',
+      id: '8',
+      slug: 'customer-portal',
       name: 'Customer Portal',
       description: 'EverBlue customer self-service portal',
       lastUpdated: '2025-10-03',
@@ -318,7 +336,7 @@ export default function Projects() {
               <div className="project-info">
                 <div className="project-header">
                   <h3>
-                    <Link href={`/webtools/projects/${project.id}`}>
+                    <Link href={`/webtools/projects/${project.slug}`}>
                       {project.name}
                     </Link>
                   </h3>

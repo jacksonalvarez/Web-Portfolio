@@ -116,7 +116,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     composer.addPass(renderPass);
     composer.addPass(bloomPass);
 
-    const ambientLight = new THREE.AmbientLight(0x23d520, 0.3);
+    const ambientLight = new THREE.AmbientLight(0x23d520 , 0.3);
     scene.add(ambientLight);
 
     const pointLight1 = new THREE.PointLight(0x23d520, 1.5, 100);
