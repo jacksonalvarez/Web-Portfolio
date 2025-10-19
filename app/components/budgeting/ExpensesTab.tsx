@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { RecurringExpense, Transaction } from '../types';
-import { useTheme } from '../theme/ThemeContext';
+import { RecurringExpense, Transaction } from '../../types/index';
+import { useTheme } from '../../theme/ThemeContext';
 import { ThemedSelect } from './ThemedComponents';
 
 interface ExpensesTabProps {

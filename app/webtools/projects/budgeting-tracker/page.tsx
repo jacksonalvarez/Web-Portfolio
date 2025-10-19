@@ -1,37 +1,8 @@
 'use client'
 
-import React, { createContext, useContext, useState, ReactNode } from 'react'
-
-interface ThemeContextType {
-  theme: string
-  setTheme: (theme: string) => void
-}
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext)
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider')
-  }
-  return context
-}
-
-interface ThemeProviderProps {
-  children: ReactNode
-}
-
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState('light')
-
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  )
-}
-
-import Dashboard from '@/app/components/budgeting/Dashboard'
+import React from 'react'
+import Dashboard from '../../../components/budgeting/Dashboard'
+import { ThemeProvider } from '../../../theme/ThemeContext'
 
 export default function BudgetingTrackerPage() {
   return (
@@ -92,8 +63,4 @@ export default function BudgetingTrackerPage() {
   )
 }
 
-export const metadata = {
-  title: 'Personal Budgeting Tracker | Jackson Alvarez - Web Tools',
-  description: 'A comprehensive budgeting tool to track income, expenses, and financial goals. Features custom themes, recurring transactions, and detailed financial overview.',
-  keywords: ['budgeting', 'finance', 'expense tracker', 'income tracker', 'financial planning'],
-}
+// Metadata moved to layout or removed since this is a client component

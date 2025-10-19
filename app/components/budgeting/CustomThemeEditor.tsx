@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useTheme } from '../theme/ThemeContext';
-import { Theme } from '../theme/themes';
+import { useTheme } from '../../theme/ThemeContext';
+import { Theme } from '../../theme/themes';
 
 interface ColorInputProps {
   label: string;

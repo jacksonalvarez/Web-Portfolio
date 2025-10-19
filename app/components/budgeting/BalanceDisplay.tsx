@@ -1,4 +1,4 @@
-import { useTheme } from '../theme/ThemeContext';
+import { useTheme } from '../../theme/ThemeContext';
 
 interface BalanceDisplayProps {
   balance: number;

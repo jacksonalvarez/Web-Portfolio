@@ -114,7 +114,6 @@ export const ThemedButton = ({ children, theme, variant = 'primary', className =
 };
 
 export const ThemedHeading = ({ children, theme, level = 2, className = "", style = {} }: any) => {
-  const Component = `h${level}` as keyof JSX.IntrinsicElements;
   const sizeClasses = {
     1: 'text-2xl',
     2: 'text-xl',
@@ -122,12 +121,23 @@ export const ThemedHeading = ({ children, theme, level = 2, className = "", styl
     4: 'text-base',
   };
 
-  return React.createElement(
-    Component,
-    {
-      className: `${sizeClasses[level as keyof typeof sizeClasses] || 'text-lg'} font-semibold ${className}`,
-      style: { color: theme.colors.textPrimary, ...style }
-    },
-    children
-  );
+  // Use proper switch statement for dynamic heading levels
+  const headingStyle = {
+    color: theme?.colors?.text || '#000',
+    ...style
+  };
+  const combinedClassName = `${sizeClasses[level as keyof typeof sizeClasses] || 'text-base'} ${className}`;
+
+  switch (level) {
+    case 1:
+      return React.createElement('h1', { className: combinedClassName, style: headingStyle }, children);
+    case 2:
+      return React.createElement('h2', { className: combinedClassName, style: headingStyle }, children);
+    case 3:
+      return React.createElement('h3', { className: combinedClassName, style: headingStyle }, children);
+    case 4:
+      return React.createElement('h4', { className: combinedClassName, style: headingStyle }, children);
+    default:
+      return React.createElement('h2', { className: combinedClassName, style: headingStyle }, children);
+  }
 };

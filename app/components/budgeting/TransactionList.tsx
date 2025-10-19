@@ -1,5 +1,5 @@
-import { Transaction } from '../page';
-import { useTheme } from '../theme/ThemeContext';
+import { Transaction } from '../../types/index';
+import { useTheme } from '../../theme/ThemeContext';
 
 interface TransactionListProps {
   transactions: Transaction[];

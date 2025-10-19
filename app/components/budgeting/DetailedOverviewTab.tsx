@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { IncomeSource, RecurringExpense, Transaction } from '../types';
-import { useTheme } from '../theme/ThemeContext';
+import { IncomeSource, RecurringExpense, Transaction } from '../../types/index';
+import { useTheme } from '../../theme/ThemeContext';
 
 interface DetailedOverviewTabProps {
   incomeSources: IncomeSource[];

@@ -1,5 +1,5 @@
-import { Transaction, IncomeSource, RecurringExpense, SavingsGoal } from '../types';
-import { useTheme } from '../theme/ThemeContext';
+import { Transaction, IncomeSource, RecurringExpense, SavingsGoal } from '../../types/index';
+import { useTheme } from '../../theme/ThemeContext';
 import BalanceDisplay from './BalanceDisplay';
 import TransactionList from './TransactionList';
 

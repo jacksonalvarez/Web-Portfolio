@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useTheme } from '../theme/ThemeContext';
-import { ThemeName } from '../theme/themes';
+import { useTheme } from '../../theme/ThemeContext';
+import { ThemeName } from '../../theme/themes';
 import CustomThemeEditor from './CustomThemeEditor';
 
 export default function ThemeSelector() {

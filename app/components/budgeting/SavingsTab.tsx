@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { SavingsGoal, Transaction } from '../types';
-import { useTheme } from '../theme/ThemeContext';
+import { SavingsGoal, Transaction } from '../../types/index';
+import { useTheme } from '../../theme/ThemeContext';
 import { ThemedSelect } from './ThemedComponents';
 
 interface SavingsTabProps {
