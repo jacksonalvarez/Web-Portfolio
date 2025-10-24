@@ -45,12 +45,12 @@ const ClientWrapper: React.FC<ClientWrapperProps> = ({ openContactModal }) => {
           width: 100%;
           max-width: 2500px;
           /* use rgba for wider compatibility with alpha channel */
-          background: rgba(0, 0, 0, 0.99);
+          background: rgba(11, 102, 2, 0.23);
           border-radius: 4px;
           
           box-shadow: 0 5px 35px #111111ff;
-          backdrop-filter: blur(35px);
-          -webkit-backdrop-filter: blur(35px);
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
           /* Make sure the element participates in stacking so backdrop-filter can access the backdrop
              (backdrop-filter only blurs elements behind it within the same stacking context). */
           position: relative;

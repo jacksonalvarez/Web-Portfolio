@@ -45,9 +45,10 @@ const Projects: React.FC = () => {
   const otherProjects = projects.filter(p => !p.featured);
 
   return (
-    <section id="projects" >
-      <SectionHeading title="Engineering Projects" subtitle="Explore my recent software engineering projects and experiments" />
-      <div className="projects-grid">
+    <section id="projects" className="projects-section">
+      <div className="projects-container">
+        <SectionHeading title="Engineering Projects" subtitle="Explore my recent software engineering projects and experiments" />
+        <div className="projects-grid">
         {[...projects]
           .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
           .map((project) => (
@@ -97,13 +98,27 @@ const Projects: React.FC = () => {
             </div>
           </div>
         ))}
+        </div>
       </div>
 
       <style jsx>{`
+        .projects-section {
+          padding: 2rem;
+          max-width: 1400px;
+          margin: 0 auto;
+          margin-bottom: 1rem;
+          width: 100%;
+        }
+
+
+
         .projects-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 2rem;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
         }
 
         .project-card {
@@ -120,6 +135,8 @@ const Projects: React.FC = () => {
           height: auto;
           display: flex;
           flex-direction: column;
+          min-width: 0;
+          box-sizing: border-box;
         }
 
         .card-content {
@@ -325,9 +342,9 @@ const Projects: React.FC = () => {
           height: 20px;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
           .projects-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
           }
         }
 
@@ -335,6 +352,15 @@ const Projects: React.FC = () => {
           .projects-grid {
             grid-template-columns: 1fr;
           }
+          
+          .projects-section {
+            padding: 1rem;
+          }
+          
+          .projects-container {
+            padding: 1.5rem;
+          }
+        }
 
           .featured-tag {
             top: 0.75rem;

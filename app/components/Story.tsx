@@ -4,9 +4,11 @@ import React from 'react';
 import SectionHeading from './SectionHeading';
 
 const Story: React.FC = () => (
-  <section id="story" className="story">
-    <div className="story-content">
+  <section id="story" className="story-section">
       <SectionHeading title="My Story" subtitle="A journey from childhood curiosity to professional software development" />
+            <div className="story-content">
+    <div className="story-container">
+
       <div className="story-text">
         <p>
           My journey into technology began with a simple curiosity at age 11. What started as tinkering with basic HTML and CSS quickly evolved into a deep fascination with how computers work. By high school, I was already developing small games and applications, teaching myself Python and Java through countless hours of experimentation and online tutorials.
@@ -22,13 +24,22 @@ const Story: React.FC = () => (
         </p>
       </div>
     </div>
+    </div>
     <style jsx>{`
-      .story {
-        background: rgb(5 5 5 / 95%);
-        border-radius: 3px;
+      .story-section {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+      }
+
+      .story-container {
+        background: #113b2763;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px #13131363;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(100px);
         padding: 3rem 2rem;
-        box-shadow: 1px 4px 4px rgba(34, 62, 35, 1);
-        margin: 2rem auto;
       }
 
       .story-content {
@@ -70,9 +81,12 @@ const Story: React.FC = () => (
       }
 
       @media (max-width: 768px) {
-        .story {
+        .story-section {
+          padding: 1rem;
+        }
+
+        .story-container {
           padding: 2rem 1.5rem;
-          margin: 1rem auto;
         }
 
         .story-text {

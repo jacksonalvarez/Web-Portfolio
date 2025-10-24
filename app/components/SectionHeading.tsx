@@ -38,7 +38,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
         }
 
         .subtitle {
-          color: #273b2bff;
+          color: #c8d794;
           font-size: 1.1rem;
           line-height: 1.6;
           font-weight: 700;

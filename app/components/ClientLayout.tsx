@@ -35,7 +35,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
 
     // Create particles
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 500;
+    const particlesCount = 300;
 
     const posArray = new Float32Array(particlesCount * 3);
 
@@ -129,7 +129,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
 
     function animate() {
       requestAnimationFrame(animate);
-      particlesMesh.rotation.y += 0.0005;
+      particlesMesh.rotation.y += .00018;
       composer.render();
     }
 

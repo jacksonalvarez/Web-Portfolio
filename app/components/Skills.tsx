@@ -58,9 +58,10 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <section id="skills">
-      <SectionHeading title="Experience" subtitle="Explore my technical expertise" />
-      <div className="skills-container">
+    <section id="skills" className="skills-section">
+      <div className="skills-outer-container">
+        <SectionHeading title="Experience" subtitle="Explore my technical expertise" />
+        <div className="skills-container">
         <div className="category-navigation">
           {categories.map((category, index) => (
             <button
@@ -100,8 +101,25 @@ const Skills: React.FC = () => {
           </div>
         </div>
       </div>
+      </div>
 
       <style jsx>{`
+        .skills-section {
+          padding: 2rem;
+          max-width: 1200px;
+          margin: 0 auto;
+          margin-bottom: 1rem;
+        }
+
+        .skills-outer-container {
+          background: #13131363;
+          border-radius: 10px;
+          box-shadow: 0 5px 15px #13131363;
+          backdrop-filter: blur(1px);
+          -webkit-backdrop-filter: blur(10px);
+          padding: 2rem;
+        }
+
         .skills-container {
           display: flex;
           gap: 2rem;
