@@ -218,26 +218,70 @@ export default function Projects() {
   return (
     <div className="webtools-container">
       <div className="welcome-section">
-        <h1>{isWorkUser ? 'Welcome to Work Tools' : 'Welcome to WebTools'}</h1>
-        <p className="welcome-description">
-          {isWorkUser ? 
-            'Access your work-related projects and professional tools here. This space is exclusively for work-related content.' :
-            'This is a private space where I manage and showcase my software projects. Access levels are determined by your login status:'
-          }
-        </p>
+        <div className="hero-section">
+          <h1>{isWorkUser ? 'Work Tools Dashboard' : 'WebTools Platform'}</h1>
+          <p className="hero-subtitle">
+            {isWorkUser ? 
+              'Professional development tools and work-related projects for collaborative use.' :
+              'Interactive development playground featuring live demos, tools, and experiments.'
+            }
+          </p>
+        </div>
+
+        <div className="features-section">
+          <h2>What is WebTools?</h2>
+          <p className="features-description">
+            {isWorkUser ? 
+              'This workspace provides access to professional tools, collaborative projects, and work-specific applications. All content here is curated for business use and team collaboration.' :
+              'WebTools is my personal development sandbox where I build, test, and showcase interactive web applications. It\'s a living laboratory for experimenting with new technologies and creating useful tools.'
+            }
+          </p>
+          
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">🎮</div>
+              <h3>Interactive Games</h3>
+              <p>Browser-based games and entertainment applications built with modern web technologies</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🛠️</div>
+              <h3>Development Tools</h3>
+              <p>Utility applications and tools for developers, designers, and productivity enthusiasts</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🧪</div>
+              <h3>Experiments</h3>
+              <p>Proof-of-concept applications testing new frameworks, APIs, and innovative ideas</p>
+            </div>
+            {!isWorkUser && (
+              <div className="feature-card">
+                <div className="feature-icon">🎯</div>
+                <h3>Demos & Prototypes</h3>
+                <p>Live demonstrations of concepts and early-stage project prototypes</p>
+              </div>
+            )}
+          </div>
+        </div>
+
         {!isWorkUser && (
           <div className="access-levels">
-            <div className="access-level">
-              <h3>Public Visitors</h3>
-              <p>View selected public projects and their documentation</p>
-            </div>
-            <div className="access-level">
-              <h3>Work Account</h3>
-              <p>Access to work-related projects and professional collaborations</p>
-            </div>
-            <div className="access-level">
-              <h3>Personal Account</h3>
-              <p>Full access to all personal and public projects</p>
+            <h2>Access Levels</h2>
+            <div className="access-grid">
+              <div className="access-level public">
+                <div className="access-icon">🌐</div>
+                <h3>Public Access</h3>
+                <p>View public projects and demos without authentication</p>
+              </div>
+              <div className="access-level work">
+                <div className="access-icon">💼</div>
+                <h3>Work Account</h3>
+                <p>Access work-related projects and professional collaboration tools</p>
+              </div>
+              <div className="access-level admin">
+                <div className="access-icon">👑</div>
+                <h3>Admin Access</h3>
+                <p>Full platform access with project management capabilities</p>
+              </div>
             </div>
           </div>
         )}
@@ -299,48 +343,149 @@ export default function Projects() {
 
         .welcome-section {
           margin-bottom: 48px;
-          padding: 32px;
-          background: rgba(22, 27, 34, 0.8);
-          border-radius: 12px;
+          padding: 40px;
+          background: rgba(22, 27, 34, 0.95);
+          border-radius: 16px;
           border: 1px solid #30363d;
+          backdrop-filter: blur(10px);
         }
 
-        .welcome-section h1 {
-          font-size: 32px;
+        .hero-section {
+          text-align: center;
+          margin-bottom: 48px;
+        }
+
+        .hero-section h1 {
+          font-size: 3rem;
           color: #23d520;
+          margin-bottom: 16px;
+          font-weight: 700;
+          background: linear-gradient(135deg, #23d520, #1f8347);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+          color: #c9d1d9;
+          font-size: 1.2rem;
+          line-height: 1.6;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .features-section {
+          margin-bottom: 48px;
+        }
+
+        .features-section h2 {
+          font-size: 2rem;
+          color: #23d520;
+          margin-bottom: 16px;
+          text-align: center;
+        }
+
+        .features-description {
+          color: #8b949e;
+          font-size: 1.1rem;
+          line-height: 1.7;
+          text-align: center;
+          max-width: 800px;
+          margin: 0 auto 32px auto;
+        }
+
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 24px;
+          margin-top: 32px;
+        }
+
+        .feature-card {
+          padding: 24px;
+          background: rgba(35, 213, 32, 0.05);
+          border-radius: 12px;
+          border: 1px solid rgba(35, 213, 32, 0.1);
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(35, 213, 32, 0.3);
+          background: rgba(35, 213, 32, 0.1);
+        }
+
+        .feature-icon {
+          font-size: 2.5rem;
           margin-bottom: 16px;
         }
 
-        .welcome-description {
-          color: #8b949e;
-          font-size: 16px;
-          line-height: 1.6;
-          margin-bottom: 24px;
+        .feature-card h3 {
+          color: #23d520;
+          font-size: 1.3rem;
+          margin-bottom: 12px;
         }
 
-        .access-levels {
+        .feature-card p {
+          color: #8b949e;
+          font-size: 0.95rem;
+          line-height: 1.5;
+        }
+
+        .access-levels h2 {
+          font-size: 1.8rem;
+          color: #23d520;
+          margin-bottom: 24px;
+          text-align: center;
+        }
+
+        .access-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 24px;
-          margin-top: 24px;
         }
 
         .access-level {
-          padding: 20px;
-          background: rgba(35, 213, 32, 0.1);
-          border-radius: 8px;
-          border: 1px solid rgba(35, 213, 32, 0.2);
+          padding: 24px;
+          background: rgba(35, 213, 32, 0.05);
+          border-radius: 12px;
+          border: 1px solid rgba(35, 213, 32, 0.1);
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+
+        .access-level:hover {
+          transform: translateY(-2px);
+          border-color: rgba(35, 213, 32, 0.3);
+        }
+
+        .access-level.public {
+          border-color: rgba(35, 213, 32, 0.2);
+        }
+
+        .access-level.work {
+          border-color: rgba(121, 184, 255, 0.2);
+        }
+
+        .access-level.admin {
+          border-color: rgba(255, 215, 0, 0.2);
+        }
+
+        .access-icon {
+          font-size: 2rem;
+          margin-bottom: 12px;
         }
 
         .access-level h3 {
           color: #23d520;
-          font-size: 18px;
+          font-size: 1.2rem;
           margin-bottom: 12px;
         }
 
         .access-level p {
           color: #8b949e;
-          font-size: 14px;
+          font-size: 0.9rem;
           line-height: 1.5;
         }
 
@@ -495,7 +640,27 @@ export default function Projects() {
         }
 
         @media (max-width: 768px) {
-          .access-levels {
+          .hero-section h1 {
+            font-size: 2.2rem;
+          }
+
+          .hero-subtitle {
+            font-size: 1.1rem;
+          }
+
+          .features-section h2 {
+            font-size: 1.6rem;
+          }
+
+          .features-description {
+            font-size: 1rem;
+          }
+
+          .features-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .access-grid {
             grid-template-columns: 1fr;
           }
 
@@ -505,6 +670,20 @@ export default function Projects() {
 
           .webtools-container {
             padding: 20px 16px;
+          }
+
+          .welcome-section {
+            padding: 24px;
+          }
+
+          .projects-header {
+            flex-direction: column;
+            gap: 16px;
+            align-items: stretch;
+          }
+
+          .header-buttons {
+            justify-content: center;
           }
         }
       `}</style>

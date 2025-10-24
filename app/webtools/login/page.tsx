@@ -96,6 +96,11 @@ export default function Login() {
             <h2>Sign In</h2>
             <p>Access your projects with Google authentication</p>
           </div>
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
           <button onClick={handleGoogleSignIn} className="google-signin-button">
             <svg className="google-icon" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -119,11 +124,17 @@ export default function Login() {
       <style jsx>{`
         .login-container {
           min-height: 100vh;
+          width: 100vw;
+          position: fixed;
+          top: 0;
+          left: 0;
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: #0d1117;
+          background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
           padding: 40px 20px;
+          z-index: 1000;
+          overflow-y: auto;
         }
 
         .webtools-intro {
@@ -132,20 +143,30 @@ export default function Login() {
           max-width: 1200px;
           margin: 0 auto;
           align-items: center;
+          width: 100%;
+          position: relative;
+          z-index: 1001;
         }
 
         .intro-content {
           flex: 1;
           padding-right: 48px;
+          background: rgba(22, 27, 34, 0.3);
+          padding: 48px;
+          border-radius: 16px;
+          border: 1px solid rgba(35, 213, 32, 0.1);
+          backdrop-filter: blur(10px);
         }
 
         .intro-content h1 {
           font-size: 48px;
-          background: linear-gradient(45deg, #23d520, #1f8347);
+          background: linear-gradient(135deg, #23d520, #1f8347);
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
           margin-bottom: 24px;
+          font-weight: 700;
+          text-shadow: 0 0 30px rgba(35, 213, 32, 0.3);
         }
 
         .intro-content > p {
@@ -189,13 +210,15 @@ export default function Login() {
         }
 
         .login-box {
-          background-color: rgba(22, 27, 34, 0.8);
+          background: rgba(22, 27, 34, 0.95);
           padding: 40px;
-          border-radius: 12px;
-          border: 1px solid #30363d;
+          border-radius: 16px;
+          border: 1px solid rgba(35, 213, 32, 0.2);
           width: 100%;
           max-width: 400px;
-          backdrop-filter: blur(10px);
+          backdrop-filter: blur(20px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(35, 213, 32, 0.1);
+          position: relative;
         }
 
         .login-header {
@@ -239,6 +262,17 @@ export default function Login() {
         .google-icon {
           width: 24px;
           height: 24px;
+        }
+
+        .error-message {
+          background: rgba(249, 117, 131, 0.1);
+          border: 1px solid rgba(249, 117, 131, 0.3);
+          color: #f97583;
+          padding: 12px;
+          border-radius: 8px;
+          margin-bottom: 16px;
+          font-size: 14px;
+          text-align: center;
         }
 
         .login-note {

@@ -1,69 +1,63 @@
 'use client';
 
 import { SessionProvider } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function WebToolsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+
   return (
     <SessionProvider>
-      <div className="webtools-layout">
-        <div className="webtools-overlay" />
-        <div className="webtools-content">
-          {children}
-        </div>
+      {/* Back button overlay - always visible, high z-index */}
+      <button 
+        onClick={() => router.push('/webtools')}
+        className="webtools-back-button"
+        aria-label="Back to WebTools"
+      >
+        ← WebTools
+      </button>
+      
+      {/* Clean content wrapper with no layout interference */}
+      <div className="webtools-clean-content">
+        {children}
+      </div>
+
       <style jsx>{`
-        .webtools-layout {
+        .webtools-back-button {
           position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
+          top: 20px;
+          left: 20px;
+          z-index: 9999;
+          background: rgba(35, 213, 32, 0.9);
+          color: #000;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 8px;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+          box-shadow: 0 4px 12px rgba(35, 213, 32, 0.3);
         }
 
-        .webtools-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
+        .webtools-back-button:hover {
+          background: rgba(35, 213, 32, 1);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(35, 213, 32, 0.4);
+        }
+
+        .webtools-clean-content {
+          /* Minimal wrapper - no layout interference */
           width: 100%;
           height: 100%;
-          background-color: rgba(13, 17, 23, 0.95);
-          backdrop-filter: blur(8px);
-          z-index: 1;
-        }
-
-        .webtools-content {
-          position: relative;
-          z-index: 2;
-          width: 100%;
-          height: 100%;
-          overflow-y: auto;
-          /* Custom scrollbar styles */
-          scrollbar-width: thin;
-          scrollbar-color: #23d520 #0d1117;
-        }
-
-        .webtools-content::-webkit-scrollbar {
-          width: 8px;
-        }
-
-        .webtools-content::-webkit-scrollbar-track {
-          background: #0d1117;
-        }
-
-        .webtools-content::-webkit-scrollbar-thumb {
-          background-color: #23d520;
-          border-radius: 20px;
-          border: 2px solid #0d1117;
+          min-height: 100vh;
         }
       `}</style>
-      </div>
     </SessionProvider>
   );
 }
