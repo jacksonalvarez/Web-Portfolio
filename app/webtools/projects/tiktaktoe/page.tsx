@@ -1,5 +1,4 @@
 "use client";
-import TikTok from "@auth/core/providers/tiktok";
 import Image from "next/image";
 import React, { use, useEffect } from "react";
 
