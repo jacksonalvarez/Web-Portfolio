@@ -1,26 +1,48 @@
 import type { Metadata } from "next";
-import { caseStudies } from "@/content/case-studies";
-import { CaseStudyCard } from "@/components/work/CaseStudyCard";
+import { CareerTrace } from "@/components/record/CareerTrace";
+import { ProjectRail } from "@/components/record/ProjectRail";
+import { profile } from "@/content/profile";
 
 export const metadata: Metadata = {
-  title: "Work",
-  description: "Case studies and production engineering write-ups.",
+  title: "Professional Record",
+  description:
+    "Jackson Alvarez's professional experience across software engineering, automation, infrastructure, and security.",
 };
 
 export default function WorkPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <p className="font-mono text-xs text-accent">CASE STUDIES</p>
-      <h1 className="mt-2 text-3xl font-bold">Work</h1>
-      <p className="mt-4 max-w-2xl text-muted leading-relaxed">
-        Real problems, real outcomes. Each case study maps to a big barrel on
-        Production Mountain — smash one in-game to unlock the summary.
-      </p>
-      <div className="mt-12 grid gap-6 lg:grid-cols-2">
-        {caseStudies.map((study) => (
-          <CaseStudyCard key={study.slug} study={study} />
-        ))}
+    <>
+      <section className="signal-grid border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+          <p className="eyebrow">Full professional record</p>
+          <div className="mt-5 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-end">
+            <h1 className="text-5xl font-semibold tracking-[-0.055em] sm:text-7xl">
+              Software is only
+              <br />
+              one layer of the system.
+            </h1>
+            <p className="border-l border-signal pl-5 text-lg leading-8 text-muted">
+              {profile.extendedSummary}
+            </p>
+          </div>
+          <div className="mt-12 flex flex-wrap gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+            <span className="border border-border bg-background px-3 py-2">
+              Higher education
+            </span>
+            <span className="border border-border bg-background px-3 py-2">
+              Government-adjacent SaaS
+            </span>
+            <span className="border border-border bg-background px-3 py-2">
+              Product engineering
+            </span>
+            <span className="border border-border bg-background px-3 py-2">
+              Automation ventures
+            </span>
+          </div>
       </div>
-    </div>
+      </section>
+      <CareerTrace />
+      <ProjectRail />
+    </>
   );
 }

@@ -1,6 +1,8 @@
-# Production Mountain
+# Jackson Alvarez — Systems Record
 
-A hybrid portfolio: editorial case studies + a Three.js arcade where you jump production incidents and smash case-study barrels.
+A content-first engineering portfolio built as a career flight recorder: a
+scroll-driven professional timeline, capability console, project artifact rail,
+print-native résumé, and an isolated slot for a future Unity WebGL game.
 
 **No database. No AWS. No retention.**
 
@@ -8,9 +10,9 @@ A hybrid portfolio: editorial case studies + a Three.js arcade where you jump pr
 
 - **Next.js** (App Router, TypeScript)
 - **Tailwind CSS**
-- **React Three Fiber** + Three.js
 - **GitHub API** — live pinned repos on `/studio`
 - **EmailJS** — contact form, client-side only
+- **Unity WebGL** — optional, click-to-load arcade artifact
 - **Vercel** — deployment target
 
 ## Setup
@@ -28,40 +30,40 @@ NEXT_PUBLIC_GITHUB_USERNAME=jacksonalvarez
 NEXT_PUBLIC_EMAILJS_SERVICE_ID=your-service-id
 NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your-template-id
 NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your-public-key
+
+# Optional Unity WebGL build
+NEXT_PUBLIC_UNITY_LOADER_URL=/unity/Build/ProductionMountain.loader.js
+NEXT_PUBLIC_UNITY_DATA_URL=/unity/Build/ProductionMountain.data
+NEXT_PUBLIC_UNITY_FRAMEWORK_URL=/unity/Build/ProductionMountain.framework.js
+NEXT_PUBLIC_UNITY_CODE_URL=/unity/Build/ProductionMountain.wasm
 ```
 
 EmailJS template should accept: `from_name`, `reply_to`, `message`.
 
 ## Pages
 
-| Route | Purpose |
-|-------|---------|
-| `/` | Home — hero + game preview + featured work |
-| `/work` | All case studies |
-| `/work/[slug]` | Individual case study |
-| `/play` | Fullscreen Production Mountain |
-| `/studio` | Build log + live GitHub repos |
-| `/contact` | EmailJS contact form |
+- `/` — complete narrative, career trace, project rail, and capabilities
+- `/work` — standalone professional record and selected artifacts
+- `/resume` — print-native résumé generated from the same typed content
+- `/play` — lazy Unity WebGL cartridge bay and game brief
+- `/studio` — agentic build record and live GitHub activity
+- `/contact` — EmailJS contact form
 
-## Game
+## Unity arcade
 
-Production Mountain is a one-screen arcade:
+The site does not ship a substitute browser game. `/play` is a production-ready
+Unity WebGL loader that stays off the homepage and requires an explicit click.
+Export a Unity build into `public/unity/`, configure the four public URLs, and
+the cartridge bay becomes playable.
 
-- **Legacy** (the gremlin) hurls incident barrels
-- **Jump** over small barrels to mark incidents solved
-- **Anger escalates** as you clear more — faster spawns, bigger barrels
-- **Hammer** spawns when Legacy is furious — smash case-study barrels to unlock write-ups
-- **Session-only state** — refresh resets everything
-
-Controls: `←` `→` or `A` `D` to move, `Space` to jump.
+The portfolio remains fully usable when no Unity build is configured.
 
 ## Content
 
 Edit files in `src/content/`:
 
-- `site.ts` — name, bio, nav
-- `incidents.ts` — small barrel labels (resume problems)
-- `case-studies.ts` — full case study write-ups
+- `profile.ts` — experience, projects, skills, story, and education
+- `site.ts` — metadata, navigation, stack, and build workflow
 
 ## Deploy
 

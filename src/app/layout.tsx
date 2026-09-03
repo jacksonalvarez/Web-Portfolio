@@ -16,11 +16,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
     default: site.name,
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  authors: [{ name: site.author.name, url: site.url }],
+  keywords: [
+    "software engineer",
+    "automation architect",
+    "Next.js",
+    "AWS",
+    "systems engineering",
+    "Charlotte",
+  ],
+  openGraph: {
+    type: "website",
+    url: site.url,
+    title: `${site.author.name} · ${site.author.role}`,
+    description: site.description,
+    siteName: site.name,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

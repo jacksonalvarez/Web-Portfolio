@@ -22,6 +22,7 @@ export async function sendContactEmail(payload: ContactPayload) {
     templateId,
     {
       from_name: payload.name,
+      from_email: payload.email,
       reply_to: payload.email,
       message: payload.message,
     },

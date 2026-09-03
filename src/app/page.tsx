@@ -1,83 +1,106 @@
 import Link from "next/link";
-import { site } from "@/content/site";
-import { getFeaturedCaseStudies } from "@/content/case-studies";
-import { CaseStudyCard } from "@/components/work/CaseStudyCard";
-import { Button } from "@/components/ui/Button";
-import { GamePreview } from "@/components/game/GameLoader";
+import { ProfileHero } from "@/components/record/ProfileHero";
+import { CareerTrace } from "@/components/record/CareerTrace";
+import { CapabilityConsole } from "@/components/record/CapabilityConsole";
+import { ProjectRail } from "@/components/record/ProjectRail";
+import { buildPrinciples, profile } from "@/content/profile";
 
 export default function HomePage() {
-  const featured = getFeaturedCaseStudies();
-
   return (
     <>
-      <section className="border-b border-border">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-24">
+      <ProfileHero />
+
+      <section className="bg-background">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:px-12 lg:py-32">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-accent">
-              {site.author.role}
-              {site.author.available && (
-                <span className="ml-2 text-success">· Available</span>
-              )}
-            </p>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-              {site.tagline}
-            </h1>
-            <p className="mt-4 max-w-lg text-muted leading-relaxed">
-              {site.description}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/work">View case studies</Button>
-              <Button href="/play" variant="secondary">
-                Play Production Mountain
-              </Button>
-              <Button
-                href={`https://github.com/${site.author.github}`}
-                variant="ghost"
-                external
-              >
-                GitHub
-              </Button>
+            <p className="eyebrow">Origin signal</p>
+            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">
+              Curiosity became a systems practice.
+            </h2>
+            <div className="mt-8 border-l border-signal pl-5">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
+                Education
+              </p>
+              <p className="mt-3 font-semibold">{profile.education.degree}</p>
+              <p className="text-sm text-muted">{profile.education.minor}</p>
+              <p className="mt-2 text-sm text-muted">
+                {profile.education.school} · {profile.education.completed}
+              </p>
             </div>
           </div>
 
-          <GamePreview />
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <p className="font-mono text-xs text-accent">FEATURED WORK</p>
-            <h2 className="mt-2 text-2xl font-semibold">Case studies worth reading</h2>
-          </div>
-          <Link href="/work" className="text-sm text-muted hover:text-accent transition-colors">
-            All work →
-          </Link>
-        </div>
-        <div className="mt-8 grid gap-6 lg:grid-cols-3">
-          {featured.map((study) => (
-            <CaseStudyCard key={study.slug} study={study} />
-          ))}
-        </div>
-      </section>
-
-      <section className="border-t border-border bg-surface">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <p className="font-mono text-xs text-accent">HOW THIS SITE WORKS</p>
-          <h2 className="mt-2 text-2xl font-semibold">No database. No retention.</h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-            {site.studio.workflow.map((item) => (
-              <li
-                key={item}
-                className="rounded-md border border-border bg-background px-4 py-3 text-sm text-muted"
-              >
-                {item}
-              </li>
+          <div className="space-y-7 text-lg leading-8 text-muted">
+            {profile.story.map((paragraph, index) => (
+              <p key={paragraph}>
+                <span className="mr-4 font-mono text-[10px] text-signal">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {paragraph}
+              </p>
             ))}
-          </ul>
-          <Button href="/studio" variant="secondary">
-            Read the studio log →
-          </Button>
+          </div>
+        </div>
+      </section>
+
+      <CareerTrace />
+      <ProjectRail />
+      <CapabilityConsole />
+
+      <section className="bg-panel">
+        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12">
+          <div className="grid gap-12 lg:grid-cols-[0.55fr_1.45fr]">
+            <div>
+              <p className="eyebrow">Build protocol</p>
+              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em]">
+                How I approach the work.
+              </h2>
+            </div>
+            <div className="grid border-l border-t border-border sm:grid-cols-2">
+              {buildPrinciples.map((principle) => (
+                <article
+                  key={principle.index}
+                  className="min-h-56 border-b border-r border-border p-6 transition-colors hover:bg-background sm:p-8"
+                >
+                  <span className="font-mono text-[10px] text-signal">
+                    {principle.index}
+                  </span>
+                  <h3 className="mt-12 text-xl font-semibold">
+                    {principle.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-muted">
+                    {principle.body}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-signal text-ink">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-8 px-5 py-16 sm:px-8 md:flex-row md:items-end md:justify-between lg:px-12">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/60">
+              Open channel
+            </p>
+            <h2 className="mt-3 max-w-3xl text-4xl font-semibold tracking-[-0.045em] sm:text-6xl">
+              Have a system worth untangling?
+            </h2>
+          </div>
+          <div className="flex shrink-0 gap-3">
+            <Link
+              href="/contact"
+              className="bg-ink px-5 py-3 text-sm font-semibold text-foreground"
+            >
+              Start a conversation
+            </Link>
+            <Link
+              href="/play"
+              className="border border-ink px-5 py-3 text-sm font-semibold"
+            >
+              Enter Arcade Lab
+            </Link>
+          </div>
         </div>
       </section>
     </>

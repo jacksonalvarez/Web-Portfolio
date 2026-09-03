@@ -30,53 +30,70 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block font-mono text-xs text-muted">
-          Name
+        <label
+          htmlFor="name"
+          className="block font-mono text-[10px] uppercase tracking-[0.16em] text-muted"
+        >
+          01 / Name
         </label>
         <input
           id="name"
           name="name"
+          autoComplete="name"
           required
-          className="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus:border-accent"
+          className="mt-2 w-full border-b border-border bg-transparent px-0 py-3 text-base text-foreground outline-none transition-colors focus:border-signal"
         />
       </div>
       <div>
-        <label htmlFor="email" className="block font-mono text-xs text-muted">
-          Email
+        <label
+          htmlFor="email"
+          className="block font-mono text-[10px] uppercase tracking-[0.16em] text-muted"
+        >
+          02 / Email
         </label>
         <input
           id="email"
           name="email"
           type="email"
+          autoComplete="email"
           required
-          className="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus:border-accent"
+          className="mt-2 w-full border-b border-border bg-transparent px-0 py-3 text-base text-foreground outline-none transition-colors focus:border-signal"
         />
       </div>
       <div>
-        <label htmlFor="message" className="block font-mono text-xs text-muted">
-          Message
+        <label
+          htmlFor="message"
+          className="block font-mono text-[10px] uppercase tracking-[0.16em] text-muted"
+        >
+          03 / What are we solving?
         </label>
         <textarea
           id="message"
           name="message"
           required
-          rows={5}
-          className="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus:border-accent resize-y"
+          rows={6}
+          className="mt-2 w-full resize-y border-b border-border bg-transparent px-0 py-3 text-base text-foreground outline-none transition-colors focus:border-signal"
         />
       </div>
       <button
         type="submit"
         disabled={status === "sending"}
-        className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-accent-dim disabled:opacity-50"
+        className="bg-signal px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-signal-strong disabled:cursor-wait disabled:opacity-50"
       >
         {status === "sending" ? "Sending…" : "Send message"}
       </button>
       {status === "sent" && (
-        <p className="text-sm text-success">Message sent. No data stored — EmailJS only.</p>
+        <p role="status" className="border-l border-success pl-4 text-sm text-success">
+          Transmission received. Nothing was stored on this site.
+        </p>
       )}
-      {status === "error" && <p className="text-sm text-danger">{error}</p>}
+      {status === "error" && (
+        <p role="alert" className="border-l border-danger pl-4 text-sm text-danger">
+          {error}
+        </p>
+      )}
     </form>
   );
 }
