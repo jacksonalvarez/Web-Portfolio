@@ -16,6 +16,8 @@
   --success: #c8ff45;
   --danger: #ff6b4a;
   --steel: #59616d;
+  --portrait-moss: #3d5a3a;
+  --portrait-rose: #c9a89a;
 }
 
 @theme inline {
@@ -34,6 +36,8 @@
   --color-success: var(--success);
   --color-danger: var(--danger);
   --color-steel: var(--steel);
+  --color-portrait-moss: var(--portrait-moss);
+  --color-portrait-rose: var(--portrait-rose);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

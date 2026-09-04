@@ -2,13 +2,14 @@ import Link from "next/link";
 import { ProfileHero } from "@/components/record/ProfileHero";
 import { CareerTrace } from "@/components/record/CareerTrace";
 import { CapabilityConsole } from "@/components/record/CapabilityConsole";
-import { ProjectRail } from "@/components/record/ProjectRail";
+// import { ProjectRail } from "@/components/record/ProjectRail";
 import { buildPrinciples, profile } from "@/content/profile";
 
 export default function HomePage() {
   return (
     <>
       <ProfileHero />
+      <CareerTrace />
 
       <section className="bg-background">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:px-12 lg:py-32">
@@ -42,8 +43,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <CareerTrace />
-      <ProjectRail />
+      {/* <ProjectRail /> */}
       <CapabilityConsole />
 
       <section className="bg-panel">

@@ -12,7 +12,7 @@ const operatingLayers = [
 export function ProfileHero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="signal-grid absolute inset-0 opacity-40" aria-hidden="true" />
+      <div className="signal-grid absolute inset-0 opacity-25" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-[1400px] px-5 pb-10 pt-5 sm:px-8 lg:px-12 lg:pb-14">
         <div className="flex flex-wrap items-center justify-between gap-3 border-y border-border py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
@@ -23,44 +23,43 @@ export function ProfileHero() {
           </span>
         </div>
 
-        <div className="grid items-center gap-8 py-8 lg:grid-cols-[minmax(0,1fr)_220px_minmax(0,0.9fr)] lg:gap-10 lg:py-10 xl:grid-cols-[minmax(0,1.05fr)_260px_minmax(0,0.95fr)]">
-          <div>
+        <div className="grid items-center gap-10 py-9 lg:grid-cols-[minmax(240px,0.78fr)_minmax(0,1.22fr)] lg:gap-16 lg:py-12">
+          <figure className="relative mx-auto w-[min(100%,22rem)] lg:mx-0 lg:w-full lg:max-w-[22.5rem]">
+            <span
+              className="absolute -inset-x-3 top-8 -bottom-3 -z-10 rounded-[2rem] bg-portrait-moss/35"
+              aria-hidden="true"
+            />
+            <span
+              className="absolute -right-4 top-0 -z-10 hidden h-24 w-24 rounded-full bg-portrait-rose/20 blur-2xl sm:block"
+              aria-hidden="true"
+            />
+            <div className="relative overflow-hidden rounded-[1.6rem] bg-panel shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+              <Image
+                src="/jackson-alvarez.jpg"
+                alt={`${profile.name} headshot`}
+                width={960}
+                height={1280}
+                priority
+                sizes="(min-width: 1024px) 360px, 88vw"
+                className="aspect-[3/4] h-auto w-full object-cover object-[50%_18%]"
+              />
+            </div>
+          </figure>
+
+          <div className="flex flex-col justify-center lg:max-w-[40rem] lg:pt-2">
             <p className="eyebrow">{profile.headline}</p>
-            <h1 className="mt-3 text-[clamp(3.4rem,8vw,7.4rem)] font-semibold leading-[0.84] tracking-[-0.075em]">
+            <h1 className="mt-4 text-[clamp(3.2rem,7vw,6.6rem)] font-semibold leading-[0.86] tracking-[-0.07em]">
               Jackson
               <br />
               <span className="text-signal">Alvarez.</span>
             </h1>
-          </div>
-
-          <figure className="justify-self-start lg:justify-self-center">
-            <div className="relative aspect-square w-44 overflow-hidden border border-signal/40 bg-panel sm:w-52 lg:w-[220px] xl:w-[248px]">
-              <Image
-                src="/jackson-alvarez.jpg"
-                alt={`${profile.name} headshot`}
-                fill
-                priority
-                sizes="(min-width: 1280px) 248px, (min-width: 1024px) 220px, 208px"
-                className="object-cover object-[50%_18%]"
-              />
-              <span
-                className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-signal/30"
-                aria-hidden="true"
-              />
-            </div>
-            <figcaption className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-              Identity capture / Charlotte
-            </figcaption>
-          </figure>
-
-          <div className="max-w-[34rem] border-l border-border pl-6 lg:translate-y-1 lg:justify-self-center">
-            <p className="text-lg leading-7 text-foreground sm:text-xl sm:leading-8">
+            <p className="mt-7 max-w-xl text-lg leading-8 text-foreground">
               {profile.summary}
             </p>
-            <p className="mt-4 text-sm leading-6 text-muted">
+            <p className="mt-4 max-w-xl text-sm leading-7 text-muted">
               {profile.extendedSummary}
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="/work"
                 className="bg-signal px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-signal-strong"

@@ -17,17 +17,14 @@ export function CapabilityConsole() {
         <div className="grid overflow-hidden border border-border lg:grid-cols-[0.7fr_1.3fr]">
           <div className="border-b border-border bg-signal p-7 text-ink sm:p-10 lg:border-b-0 lg:border-r">
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/60">
-              Capability console
+              Skills
             </p>
             <h2 className="mt-5 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">
-              Range is useful.
-              <br />
-              Systems thinking connects it.
+              Skills I work with.
             </h2>
             <p className="mt-6 max-w-md text-sm leading-6 text-ink/70">
-              The stack changes with the problem. The operating model does not:
-              understand the system, automate deliberately, and make the result
-              observable.
+              Languages, platforms, and the operating modes I use when the
+              problem is still messy.
             </p>
           </div>
 
@@ -35,7 +32,7 @@ export function CapabilityConsole() {
             <div
               className="flex overflow-x-auto border-b border-border"
               role="tablist"
-              aria-label="Capability groups"
+              aria-label="Skills"
             >
               {capabilityGroups.map((group, index) => (
                 <button
@@ -73,7 +70,7 @@ export function CapabilityConsole() {
                   </p>
                 </div>
                 <span className="font-mono text-xs text-muted">
-                  {String(active.items.length).padStart(2, "0")} SIGNALS
+                  {String(active.items.length).padStart(2, "0")} SKILLS
                 </span>
               </div>
 
