@@ -52,6 +52,7 @@ export function UnityArcade() {
   const [error, setError] = useState("");
 
   async function loadGame() {
+    if (typeof window === "undefined") return;
     if (!configured || !canvasRef.current || !unityConfig.loaderUrl) return;
 
     setStatus("loading");

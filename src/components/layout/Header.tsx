@@ -19,6 +19,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={item.href !== "/play"}
               className={`border-l border-border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted transition-colors hover:bg-signal hover:text-ink sm:px-4 ${
                 item.label === "Studio" || item.label === "Résumé"
                   ? "hidden md:inline-flex"

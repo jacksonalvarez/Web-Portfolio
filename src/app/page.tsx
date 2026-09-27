@@ -96,6 +96,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/play"
+              prefetch={false}
               className="border border-ink px-5 py-3 text-sm font-semibold"
             >
               Enter Arcade Lab

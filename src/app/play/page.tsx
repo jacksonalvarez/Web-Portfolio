@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { UnityArcade } from "@/components/arcade/UnityArcade";
+import { UnityArcadeClient } from "@/components/arcade/UnityArcadeClient";
+
+export const dynamic = "force-static";
+export const runtime = "nodejs";
 
 export const metadata: Metadata = {
   title: "Arcade Lab",
@@ -8,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function PlayPage() {
-  return <UnityArcade />;
+  return <UnityArcadeClient />;
 }
