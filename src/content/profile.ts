@@ -152,12 +152,22 @@ export const projects: Project[] = [
     status: "shipped",
   },
   {
+    slug: "backrooms",
+    name: "Backrooms",
+    description:
+      "A Unity WebGL horror exploration game: fluorescent halls, wrong geometry, no clear exit.",
+    detail:
+      "Shipped into Arcade Lab as a click-to-load cartridge so the homepage never pays the WebGL cost.",
+    technologies: ["Unity", "C#", "WebGL"],
+    status: "shipped",
+  },
+  {
     slug: "the-lighthouse",
     name: "The Lighthouse",
     description:
       "A hobbyist Unity story game: a horror-movie parody inspired by The Lighthouse.",
     detail:
-      "Early proof that I think in game runtimes, not just web canvases. This is why Arcade Lab is a Unity slot, not another browser prototype.",
+      "Earlier proof that I think in game runtimes, not just web canvases.",
     technologies: ["Unity", "C#", "Narrative systems"],
     status: "research",
   },
@@ -176,9 +186,9 @@ export const projects: Project[] = [
     slug: "portfolio",
     name: "This Portfolio",
     description:
-      "A content-first engineering portfolio with a Unity-ready arcade slot and a live GitHub signal.",
+      "A content-first engineering portfolio with a live GitHub signal and a Unity arcade slot for Backrooms.",
     detail:
-      "Next.js renders the professional record; EmailJS handles contact without storage; a future Unity WebGL build stays opt-in and off the critical path.",
+      "Next.js renders the professional record; EmailJS handles contact without storage; Backrooms loads only after an explicit click.",
     technologies: ["Next.js", "TypeScript", "Vercel", "Agentic workflows"],
     href: "https://github.com/jacksonalvarez/Web-Portfolio",
     status: "evolving",

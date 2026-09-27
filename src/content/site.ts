@@ -26,7 +26,7 @@ export const site = {
       "GitHub supplies a live repository signal; it is never copied into a database.",
       "EmailJS delivers contact messages without a custom backend or retained form data.",
       "Focused agent passes recover content, challenge the interaction model, implement, and verify.",
-      "The Unity WebGL arcade is lazy-loaded as an optional cartridge, never as a homepage dependency.",
+      "Backrooms is a Unity WebGL cartridge: lazy-loaded on /play, never a homepage dependency.",
     ],
   },
 } as const;
