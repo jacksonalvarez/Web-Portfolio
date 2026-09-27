@@ -2,7 +2,7 @@
 
 A content-first engineering portfolio built as a career flight recorder: a
 scroll-driven professional timeline, capability console, project artifact rail,
-print-native résumé, and an isolated slot for a future Unity WebGL game.
+print-native résumé, and an isolated Unity WebGL slot for Backrooms.
 
 **No database. No AWS. No retention.**
 
@@ -12,7 +12,7 @@ print-native résumé, and an isolated slot for a future Unity WebGL game.
 - **Tailwind CSS**
 - **GitHub API** — live pinned repos on `/studio`
 - **EmailJS** — contact form, client-side only
-- **Unity WebGL** — optional, click-to-load arcade artifact
+- **Unity WebGL** — click-to-load Backrooms arcade artifact
 - **Vercel** — deployment target
 
 ## Setup
@@ -31,11 +31,11 @@ NEXT_PUBLIC_EMAILJS_SERVICE_ID=your-service-id
 NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your-template-id
 NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your-public-key
 
-# Optional Unity WebGL build
-NEXT_PUBLIC_UNITY_LOADER_URL=/unity/Build/ProductionMountain.loader.js
-NEXT_PUBLIC_UNITY_DATA_URL=/unity/Build/ProductionMountain.data
-NEXT_PUBLIC_UNITY_FRAMEWORK_URL=/unity/Build/ProductionMountain.framework.js
-NEXT_PUBLIC_UNITY_CODE_URL=/unity/Build/ProductionMountain.wasm
+# Optional Unity WebGL overrides (defaults ship with Backrooms)
+NEXT_PUBLIC_UNITY_LOADER_URL=/unity/Build/teststt.loader.js
+NEXT_PUBLIC_UNITY_DATA_URL=/unity/Build/teststt.data.br
+NEXT_PUBLIC_UNITY_FRAMEWORK_URL=/unity/Build/teststt.framework.js.br
+NEXT_PUBLIC_UNITY_CODE_URL=/unity/Build/teststt.wasm.br
 ```
 
 EmailJS template should accept: `from_name`, `reply_to`, `message`.
@@ -45,18 +45,17 @@ EmailJS template should accept: `from_name`, `reply_to`, `message`.
 - `/` — complete narrative, career trace, project rail, and capabilities
 - `/work` — standalone professional record and selected artifacts
 - `/resume` — print-native résumé generated from the same typed content
-- `/play` — lazy Unity WebGL cartridge bay and game brief
+- `/play` — lazy Unity WebGL cartridge bay for Backrooms
 - `/studio` — agentic build record and live GitHub activity
 - `/contact` — EmailJS contact form
 
 ## Unity arcade
 
-The site does not ship a substitute browser game. `/play` is a production-ready
-Unity WebGL loader that stays off the homepage and requires an explicit click.
-Export a Unity build into `public/unity/`, configure the four public URLs, and
-the cartridge bay becomes playable.
+`/play` loads the shipped Backrooms Unity WebGL build only after an explicit
+click. The export lives in `public/unity/Build/` (`teststt.*`, brotli-compressed).
+Next.js and Vercel send `Content-Encoding: br` so the browser can decompress it.
 
-The portfolio remains fully usable when no Unity build is configured.
+Override the four `NEXT_PUBLIC_UNITY_*` URLs to swap in another build.
 
 ## Content
 

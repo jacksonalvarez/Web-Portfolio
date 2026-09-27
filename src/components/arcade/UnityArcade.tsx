@@ -25,11 +25,19 @@ declare global {
   }
 }
 
+const DEFAULT_UNITY = {
+  loaderUrl: "/unity/Build/teststt.loader.js",
+  dataUrl: "/unity/Build/teststt.data.br",
+  frameworkUrl: "/unity/Build/teststt.framework.js.br",
+  codeUrl: "/unity/Build/teststt.wasm.br",
+} as const;
+
 const unityConfig = {
-  loaderUrl: process.env.NEXT_PUBLIC_UNITY_LOADER_URL,
-  dataUrl: process.env.NEXT_PUBLIC_UNITY_DATA_URL,
-  frameworkUrl: process.env.NEXT_PUBLIC_UNITY_FRAMEWORK_URL,
-  codeUrl: process.env.NEXT_PUBLIC_UNITY_CODE_URL,
+  loaderUrl: process.env.NEXT_PUBLIC_UNITY_LOADER_URL || DEFAULT_UNITY.loaderUrl,
+  dataUrl: process.env.NEXT_PUBLIC_UNITY_DATA_URL || DEFAULT_UNITY.dataUrl,
+  frameworkUrl:
+    process.env.NEXT_PUBLIC_UNITY_FRAMEWORK_URL || DEFAULT_UNITY.frameworkUrl,
+  codeUrl: process.env.NEXT_PUBLIC_UNITY_CODE_URL || DEFAULT_UNITY.codeUrl,
 };
 
 const configured = Object.values(unityConfig).every(Boolean);
@@ -41,12 +49,14 @@ export function UnityArcade() {
     "cartridge-missing" | "idle" | "loading" | "running" | "error"
   >(configured ? "idle" : "cartridge-missing");
   const [progress, setProgress] = useState(0);
+  const [error, setError] = useState("");
 
   async function loadGame() {
     if (!configured || !canvasRef.current || !unityConfig.loaderUrl) return;
 
     setStatus("loading");
     setProgress(0);
+    setError("");
 
     try {
       if (!window.createUnityInstance) {
@@ -70,15 +80,16 @@ export function UnityArcade() {
           dataUrl: unityConfig.dataUrl!,
           frameworkUrl: unityConfig.frameworkUrl!,
           codeUrl: unityConfig.codeUrl!,
-          streamingAssetsUrl: "StreamingAssets",
+          streamingAssetsUrl: "/unity/StreamingAssets",
           companyName: "Jackson Alvarez",
-          productName: "Production Mountain",
-          productVersion: "1.0",
+          productName: "Backrooms",
+          productVersion: "0.1.0",
         },
         setProgress,
       );
       setStatus("running");
-    } catch {
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
       setStatus("error");
     }
   }
@@ -102,9 +113,11 @@ export function UnityArcade() {
           <div>
             <div className="relative aspect-video overflow-hidden border border-[#30343b] bg-black">
               <canvas
+                id="unity-canvas"
                 ref={canvasRef}
-                className={`h-full w-full ${status === "running" ? "block" : "invisible"}`}
-                aria-label="Production Mountain Unity game"
+                className="h-full w-full"
+                aria-label="Backrooms Unity game"
+                tabIndex={-1}
               />
 
               {status !== "running" && (
@@ -134,13 +147,12 @@ export function UnityArcade() {
                             : "Cartridge detected"}
                     </p>
                     <h1 className="mt-4 text-4xl font-semibold tracking-[-0.045em] sm:text-6xl">
-                      Production Mountain
+                      Backrooms
                     </h1>
                     <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[#9ca3af]">
-                      A real game belongs in a real game runtime. The disposable
-                      Three.js prototype is gone; this bay is ready for an
-                      exported Unity WebGL build and loads it only when a visitor
-                      asks.
+                      A Unity WebGL horror exploration build. It stays off the
+                      homepage and only loads after an explicit click so the
+                      professional record stays light.
                     </p>
 
                     {status === "idle" && (
@@ -153,13 +165,20 @@ export function UnityArcade() {
                       </button>
                     )}
                     {status === "error" && (
-                      <button
-                        type="button"
-                        onClick={loadGame}
-                        className="mt-7 border border-[#c8ff45] px-6 py-3 text-sm font-semibold text-[#c8ff45]"
-                      >
-                        Retry load
-                      </button>
+                      <>
+                        {error && (
+                          <p className="mx-auto mt-4 max-w-lg text-left font-mono text-[11px] leading-5 text-[#ff8a8a]">
+                            {error}
+                          </p>
+                        )}
+                        <button
+                          type="button"
+                          onClick={loadGame}
+                          className="mt-7 border border-[#c8ff45] px-6 py-3 text-sm font-semibold text-[#c8ff45]"
+                        >
+                          Retry load
+                        </button>
+                      </>
                     )}
                   </div>
                 </div>
@@ -195,8 +214,8 @@ export function UnityArcade() {
                   Concept
                 </dt>
                 <dd className="mt-1 text-sm">
-                  Climb a failing production stack. Dodge incidents. Convert
-                  chaos into shipped systems.
+                  Wander a yellow, fluorescent liminal space. Find the way
+                  out — or realize there isn&apos;t one.
                 </dd>
               </div>
               <div>
